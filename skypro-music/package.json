@@ -11,15 +11,9 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:js && npm run format"
-    }
-  },
   "scripts": {
     "format": "prettier --write .",
     "lint:js": "eslint ./src/*.js --ignore-pattern *.test.js",
-    "prepare": "husky install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,7 +42,6 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.1",
-    "husky": "^8.0.3",
     "prettier": "^3.0.1"
   }
 }
