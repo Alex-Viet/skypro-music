@@ -1,28 +1,13 @@
 import './CenterBlock.css';
+import Filter from './Filter';
+import Search from './Search';
 
 export default function CenterBlock() {
   return (
     <div className="main__centerblock centerblock">
-      <div className="centerblock__search search">
-        <svg className="search__svg">
-          <use xlinkHref="img/icon/sprite.svg#icon-search" />
-        </svg>
-        <input
-          className="search__text"
-          type="search"
-          placeholder="Поиск"
-          name="search"
-        />
-      </div>
+      <Search />
       <h2 className="centerblock__h2">Треки</h2>
-      <div className="centerblock__filter filter">
-        <div className="filter__title">Искать по:</div>
-        <div className="filter__button button-author _btn-text">
-          исполнителю
-        </div>
-        <div className="filter__button button-year _btn-text">году выпуска</div>
-        <div className="filter__button button-genre _btn-text">жанру</div>
-      </div>
+      <Filter />
       <div className="centerblock__content">
         <div className="content__title playlist-title">
           <div className="playlist-title__col col01">Трек</div>
@@ -148,7 +133,7 @@ export default function CenterBlock() {
                 <div className="track__title-text">
                   <a className="track__title-link" href="http://">
                     Non Stop
-                    <span className="track__title-span">(Remix)</span>
+                    <span className="track__title-span"> (Remix)</span>
                   </a>
                 </div>
               </div>
@@ -182,7 +167,7 @@ export default function CenterBlock() {
                 <div className="track__title-text">
                   <a className="track__title-link" href="http://">
                     Run Run
-                    <span className="track__title-span">(feat. AR/CO)</span>
+                    <span className="track__title-span"> (feat. AR/CO)</span>
                   </a>
                 </div>
               </div>
@@ -216,7 +201,10 @@ export default function CenterBlock() {
                 <div className="track__title-text">
                   <a className="track__title-link" href="http://">
                     Eyes on Fire
-                    <span className="track__title-span">(Zeds Dead Remix)</span>
+                    <span className="track__title-span">
+                      {' '}
+                      (Zeds Dead Remix)
+                    </span>
                   </a>
                 </div>
               </div>
