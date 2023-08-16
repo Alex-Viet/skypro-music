@@ -1,6 +1,6 @@
 import './CenterBlock.css';
-import Filter from './Filter';
-import Search from './Search';
+import Filter from '../Filter/Filter';
+import Search from '../Search/Search';
 
 export default function CenterBlock() {
   return (

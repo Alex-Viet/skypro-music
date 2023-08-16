@@ -1,8 +1,8 @@
 import './App.css';
-import Bar from './components/Bar';
-import CenterBlock from './components/CenterBlock';
-import MainNav from './components/MainNav';
-import Sidebar from './components/Sidebar';
+import Bar from './components/Bar/Bar';
+import CenterBlock from './components/CenterBlock/CenterBlock';
+import MainNav from './components/MainNav/MainNav';
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
   return (
