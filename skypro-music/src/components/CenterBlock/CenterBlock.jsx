@@ -3,7 +3,7 @@ import Filter from '../Filter/Filter';
 import Search from '../Search/Search';
 import Track from '../Track/Track';
 
-export default function CenterBlock() {
+export default function CenterBlock({ isLoading }) {
   return (
     <div className="main__centerblock centerblock">
       <Search />
@@ -26,6 +26,7 @@ export default function CenterBlock() {
             author="Nero"
             album="Welcome Reality"
             time="4:44"
+            isLoading={isLoading}
           />
 
           <Track
@@ -33,6 +34,7 @@ export default function CenterBlock() {
             author="Dynoro, Outwork, Mr. Gee"
             album="Elektro"
             time="2:22"
+            isLoading={isLoading}
           />
 
           <Track
@@ -40,6 +42,7 @@ export default function CenterBlock() {
             author="Ali Bakgor"
             album="I’m Fire"
             time="2:22"
+            isLoading={isLoading}
           />
 
           <Track
@@ -48,6 +51,7 @@ export default function CenterBlock() {
             author="Стоункат, Psychopath"
             album="Non Stop"
             time="4:12"
+            isLoading={isLoading}
           />
 
           <Track
@@ -56,6 +60,7 @@ export default function CenterBlock() {
             author="Jaded, Will Clarke, AR/CO"
             album="Run Run"
             time="2:54"
+            isLoading={isLoading}
           />
 
           <Track
@@ -64,6 +69,7 @@ export default function CenterBlock() {
             author="Blue Foundation, Zeds Dead"
             album="Eyes on Fire"
             time="5:20"
+            isLoading={isLoading}
           />
 
           <Track
@@ -72,6 +78,7 @@ export default function CenterBlock() {
             author="HYBIT, Mr. Black, Offer Nissim, Hi Profile"
             album="Mucho Bien"
             time="3:41"
+            isLoading={isLoading}
           />
 
           <Track
@@ -79,6 +86,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -86,6 +94,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -93,6 +102,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -100,6 +110,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -107,6 +118,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -114,6 +126,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -121,6 +134,7 @@ export default function CenterBlock() {
             author="minthaze"
             album="Captivating"
             time="1:48"
+            isLoading={isLoading}
           />
 
           <Track
@@ -128,6 +142,7 @@ export default function CenterBlock() {
             author="Calvin Harris, Disciples"
             album="How Deep Is Your Love"
             time="3:32"
+            isLoading={isLoading}
           />
 
           <Track
@@ -135,9 +150,10 @@ export default function CenterBlock() {
             author="Tom Boxer"
             album="Soundz Made in Romania"
             time="3:36"
+            isLoading={isLoading}
           />
 
-          <Track />
+          <Track isLoading={isLoading} />
         </div>
       </div>
     </div>
