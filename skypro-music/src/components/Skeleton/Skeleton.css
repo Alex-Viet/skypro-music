@@ -1,3 +1,4 @@
+/* Skeletons for tracks */
 .skeleton__playlist-track {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -30,4 +31,21 @@
 .skeleton-track__album {
   width: 305px;
   height: 19px;
+}
+
+/* Skeletons for sidebar's playlists */
+.skeleton__sidebar-item {
+  width: 250px;
+  height: 150px;
+}
+
+/* Skeletons for track play */
+.skeleton__track-play-image {
+  width: 51px;
+  height: 51px;
+}
+
+.skeleton__track-play-author-album {
+  width: 59px;
+  height: 15px;
 }

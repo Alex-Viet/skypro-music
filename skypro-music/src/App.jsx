@@ -20,10 +20,10 @@ function App() {
         <main className="main">
           <MainNav />
           <CenterBlock isLoading={isLoading} />
-          <Sidebar />
+          <Sidebar isLoading={isLoading} />
         </main>
         <div className="bar">
-          <Bar />
+          <Bar isLoading={isLoading} />
         </div>
         <footer className="footer" />
       </div>
