@@ -7,8 +7,10 @@ export default function CenterBlock({ isLoading }) {
   return (
     <div className="main__centerblock centerblock">
       <Search />
+
       <h2 className="centerblock__h2">Треки</h2>
       <Filter />
+
       <div className="centerblock__content">
         <div className="content__title playlist-title">
           <div className="playlist-title__col col01">Трек</div>

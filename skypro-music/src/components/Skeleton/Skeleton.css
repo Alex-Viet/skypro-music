@@ -1,3 +1,7 @@
+.sceleton {
+  background: #313131;
+}
+
 /* Skeletons for tracks */
 .skeleton__playlist-track {
   display: -webkit-box;
