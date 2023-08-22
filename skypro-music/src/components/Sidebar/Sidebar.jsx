@@ -1,7 +1,7 @@
 import Playlist from '../Playlist/Playlist';
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ isLoading }) {
   return (
     <div className="main__sidebar sidebar">
       <div className="sidebar__personal">
@@ -14,9 +14,9 @@ function Sidebar() {
       </div>
       <div className="sidebar__block">
         <div className="sidebar__list">
-          <Playlist number="01" />
-          <Playlist number="02" />
-          <Playlist number="03" />
+          <Playlist number="01" isLoading={isLoading} />
+          <Playlist number="02" isLoading={isLoading} />
+          <Playlist number="03" isLoading={isLoading} />
         </div>
       </div>
     </div>
