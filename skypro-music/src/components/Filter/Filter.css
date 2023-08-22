@@ -1,4 +1,5 @@
 .centerblock__filter {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,4 +33,10 @@
 
 .filter__button:not(:last-child) {
   margin-right: 10px;
+}
+
+.btn-text_active {
+  border-color: #ad61ff;
+  color: #ad61ff;
+  cursor: pointer;
 }

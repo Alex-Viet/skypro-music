@@ -1,0 +1,44 @@
+.popup {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #313131;
+}
+
+.filter__popup {
+  position: absolute;
+  width: 248px;
+  height: 305px;
+  padding: 34px;
+}
+
+.popup__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  overflow-y: scroll;
+}
+
+.popup__list::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 4px;
+  background-color: #4b4949;
+}
+
+.popup__list::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.popup__text {
+  color: #fff;
+}
+
+.popup__text:hover {
+  color: #b672ff;
+  text-decoration-line: underline;
+}
