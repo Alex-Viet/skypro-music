@@ -1,40 +1,40 @@
 import Skeleton from '../../Skeleton/Skeleton';
-import '../Bar.css';
+import * as S from './TrackPlay.styles';
 
 export default function TrackPlay({ isLoading }) {
   return (
-    <div className="track-play__contain">
+    <S.TrackPlayContain>
       {isLoading ? (
         <>
-          <div className="track-play__image">
+          <S.TrackPlayImage>
             <Skeleton className="skeleton__track-play-image" />
-          </div>
-          <div className="track-play__author">
+          </S.TrackPlayImage>
+          <S.TrackPlayAuthor>
             <Skeleton className="skeleton__track-play-author-album" />
-          </div>
-          <div className="track-play__album">
+          </S.TrackPlayAuthor>
+          <S.TrackPlayAlbum>
             <Skeleton className="skeleton__track-play-author-album" />
-          </div>
+          </S.TrackPlayAlbum>
         </>
       ) : (
         <>
-          <div className="track-play__image">
-            <svg className="track-play__svg" alt="music">
+          <S.TrackPlayImage>
+            <S.TrackPlaySvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note" />
-            </svg>
-          </div>
-          <div className="track-play__author">
-            <a className="track-play__author-link" href="http://">
+            </S.TrackPlaySvg>
+          </S.TrackPlayImage>
+          <S.TrackPlayAuthor>
+            <S.TrackPlayAuthorLink href="http://">
               Ты та...
-            </a>
-          </div>
-          <div className="track-play__album">
-            <a className="track-play__album-link" href="http://">
+            </S.TrackPlayAuthorLink>
+          </S.TrackPlayAuthor>
+          <S.TrackPlayAlbum>
+            <S.TrackPlayAlbumLink href="http://">
               Баста
-            </a>
-          </div>
+            </S.TrackPlayAlbumLink>
+          </S.TrackPlayAlbum>
         </>
       )}
-    </div>
+    </S.TrackPlayContain>
   );
 }

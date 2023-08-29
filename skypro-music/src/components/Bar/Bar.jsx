@@ -1,50 +1,50 @@
-import './Bar.css';
+import * as S from './Bar.styles';
 import PlayerControls from './BarPlayerControls/PlayerControls';
 import TrackPlay from './BarTrackPlay/TrackPlay';
 
 function Bar({ isLoading }) {
   return (
-    <div className="bar__content">
-      <div className="bar__player-progress" />
-      <div className="bar__player-block">
-        <div className="bar__player player">
+    <S.BarContent>
+      <S.BarPlayerProgress />
+      <S.BarPlayerBlock>
+        <S.BarPlayer>
           <PlayerControls />
 
-          <div className="player__track-play track-play">
+          <S.PlayerTrackPlay>
             <TrackPlay isLoading={isLoading} />
 
-            <div className="track-play__like-dis">
-              <div className="track-play__like _btn-icon">
-                <svg className="track-play__like-svg" alt="like">
+            <S.TrackPlayLikeDis>
+              <S.TrackPlayLike className="_btn-icon">
+                <S.TrackPlayLikeSvg alt="like">
                   <use xlinkHref="img/icon/sprite.svg#icon-like" />
-                </svg>
-              </div>
-              <div className="track-play__dislike _btn-icon">
-                <svg className="track-play__dislike-svg" alt="dislike">
+                </S.TrackPlayLikeSvg>
+              </S.TrackPlayLike>
+              <S.TrackPlayDislike className="_btn-icon">
+                <S.TrackPlayDislikeSvg alt="dislike">
                   <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bar__volume-block volume">
-          <div className="volume__content">
-            <div className="volume__image">
-              <svg className="volume__svg" alt="volume">
+                </S.TrackPlayDislikeSvg>
+              </S.TrackPlayDislike>
+            </S.TrackPlayLikeDis>
+          </S.PlayerTrackPlay>
+        </S.BarPlayer>
+        <S.BarVolumeBlock>
+          <S.VolumeContent>
+            <S.VolumeImage>
+              <S.VolumeSvg>
                 <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-              </svg>
-            </div>
-            <div className="volume__progress _btn">
-              <input
-                className="volume__progress-line _btn"
+              </S.VolumeSvg>
+            </S.VolumeImage>
+            <S.VolumeProgress>
+              <S.VolumeProgressLine
+                className="_btn"
                 type="range"
                 name="range"
               />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </S.VolumeProgress>
+          </S.VolumeContent>
+        </S.BarVolumeBlock>
+      </S.BarPlayerBlock>
+    </S.BarContent>
   );
 }
 
