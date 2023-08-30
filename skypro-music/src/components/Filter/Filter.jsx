@@ -24,7 +24,6 @@ function Filter() {
         <S.FilterButton
           $active={activeFilter === filter.id}
           key={filter.id}
-          className="_btn-text"
           onClick={() => filterClickHandler(filter.id)}
         >
           {filter.name}
