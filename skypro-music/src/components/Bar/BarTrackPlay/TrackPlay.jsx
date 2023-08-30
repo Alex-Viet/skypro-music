@@ -7,13 +7,13 @@ export default function TrackPlay({ isLoading }) {
       {isLoading ? (
         <>
           <S.TrackPlayImage>
-            <Skeleton className="skeleton__track-play-image" />
+            <Skeleton width="51px" height="51px" />
           </S.TrackPlayImage>
           <S.TrackPlayAuthor>
-            <Skeleton className="skeleton__track-play-author-album" />
+            <Skeleton width="59px" height="15px" />
           </S.TrackPlayAuthor>
           <S.TrackPlayAlbum>
-            <Skeleton className="skeleton__track-play-author-album" />
+            <Skeleton width="59px" height="15px" />
           </S.TrackPlayAlbum>
         </>
       ) : (
@@ -29,9 +29,7 @@ export default function TrackPlay({ isLoading }) {
             </S.TrackPlayAuthorLink>
           </S.TrackPlayAuthor>
           <S.TrackPlayAlbum>
-            <S.TrackPlayAlbumLink href="http://">
-              Баста
-            </S.TrackPlayAlbumLink>
+            <S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
           </S.TrackPlayAlbum>
         </>
       )}

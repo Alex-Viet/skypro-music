@@ -9,7 +9,7 @@ function Playlist({ number, isLoading }) {
   return (
     <S.SidebarItem>
       {isLoading ? (
-        <Skeleton className="skeleton__sidebar-item" />
+        <Skeleton width="250px" height="150px" />
       ) : (
         <S.SidebarLink href="!#">
           <S.SidebarImage

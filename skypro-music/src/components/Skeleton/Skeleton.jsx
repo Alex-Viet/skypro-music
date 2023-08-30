@@ -1,9 +1,7 @@
-import './Skeleton.css';
+import StyledSkeleton from './Skeleton.styles';
 
-function Skeleton({ className }) {
-  const classes = `${className} sceleton`;
-
-  return <div className={classes} />;
+function Skeleton({ width, height, margin }) {
+  return <StyledSkeleton $width={width} $height={height} $margin={margin} />;
 }
 
 export default Skeleton;

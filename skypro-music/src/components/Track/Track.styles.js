@@ -6,7 +6,7 @@ export const PlaylistItem = styled.div`
   margin-bottom: 12px;
 `;
 
-export const PlaylistTrack = styled.div`
+export const PlaylistTrackSkeleton = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,12 +14,15 @@ export const PlaylistTrack = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+`;
+
+export const PlaylistTrack = styled(PlaylistTrackSkeleton)`
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 `;
 
 export const TrackTitle = styled.div`

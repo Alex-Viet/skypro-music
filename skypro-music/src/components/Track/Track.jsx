@@ -13,20 +13,20 @@ export default function Track({
   return (
     <S.PlaylistItem>
       {isLoading ? (
-        <div className="skeleton__playlist-track">
+        <S.PlaylistTrackSkeleton>
           <S.TrackTitle>
-            <Skeleton className="skeleton__track-title-image" />
+            <Skeleton width="51px" height="51px" margin="17px" />
             <div>
-              <Skeleton className="skeleton__track-title-text" />
+              <Skeleton width="356px" height="19px" />
             </div>
           </S.TrackTitle>
           <S.TrackAuthor>
-            <Skeleton className="skeleton__track-author" />
+            <Skeleton width="271px" height="19px" />
           </S.TrackAuthor>
           <S.TrackAlbum>
-            <Skeleton className="skeleton-track__album" />
+            <Skeleton width="305px" height="19px" />
           </S.TrackAlbum>
-        </div>
+        </S.PlaylistTrackSkeleton>
       ) : (
         <S.PlaylistTrack>
           <S.TrackTitle>
