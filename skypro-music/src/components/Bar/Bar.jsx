@@ -14,12 +14,12 @@ function Bar({ isLoading }) {
             <TrackPlay isLoading={isLoading} />
 
             <S.TrackPlayLikeDis>
-              <S.TrackPlayLike>
+              <S.TrackPlayLike className="_btn-icon">
                 <S.TrackPlayLikeSvg alt="like">
                   <use xlinkHref="img/icon/sprite.svg#icon-like" />
                 </S.TrackPlayLikeSvg>
               </S.TrackPlayLike>
-              <S.TrackPlayDislike>
+              <S.TrackPlayDislike className="_btn-icon">
                 <S.TrackPlayDislikeSvg alt="dislike">
                   <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
                 </S.TrackPlayDislikeSvg>
@@ -35,7 +35,11 @@ function Bar({ isLoading }) {
               </S.VolumeSvg>
             </S.VolumeImage>
             <S.VolumeProgress>
-              <S.VolumeProgressLine type="range" name="range" />
+              <S.VolumeProgressLine
+                className="_btn"
+                type="range"
+                name="range"
+              />
             </S.VolumeProgress>
           </S.VolumeContent>
         </S.BarVolumeBlock>
