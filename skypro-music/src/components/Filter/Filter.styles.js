@@ -1,4 +1,6 @@
-.centerblock__filter {
+import { styled } from 'styled-components';
+
+export const CenterBlockFilter = styled.div`
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,17 +13,17 @@
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 51px;
-}
+`;
 
-.filter__title {
+export const FilterTitle = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   margin-right: 15px;
-}
+`;
 
-.filter__button {
+export const FilterButton = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -29,14 +31,9 @@
   border: 1px solid #ffffff;
   border-radius: 60px;
   padding: 6px 20px;
-}
+  ${({ $active }) => $active && 'color: #ad61ff;\nborder-color: #d9b6ff;'}
 
-.filter__button:not(:last-child) {
-  margin-right: 10px;
-}
-
-.btn-text_active {
-  border-color: #ad61ff;
-  color: #ad61ff;
-  cursor: pointer;
-}
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`;

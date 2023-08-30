@@ -1,36 +1,36 @@
-import './FilterPopup.css';
+import * as S from './FilterPopup.styles';
 
 function FilterPopupGenre() {
   return (
-    <div className="popup filter__popup" style={{ top: '49px', left: '390px' }}>
-      <ul className="popup__list">
+    <S.FilterPopupGenre>
+      <S.PopupList>
         <li key="1">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Рок
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="2">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Хип-хоп
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="3">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Поп-музыка
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="4">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Техно
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="5">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Инди
-          </a>
+          </S.PopupTextLink>
         </li>
-      </ul>
-    </div>
+      </S.PopupList>
+    </S.FilterPopupGenre>
   );
 }
 
