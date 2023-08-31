@@ -36,17 +36,17 @@ export default function Track({
               </S.TrackTitleSvg>
             </S.TrackTitleImage>
             <div>
-              <S.TrackTitleLink href="http://">
+              <S.TrackTitleLink href="!#">
                 {track}
                 <S.TrackTitleSpan>{extra}</S.TrackTitleSpan>
               </S.TrackTitleLink>
             </div>
           </S.TrackTitle>
           <S.TrackAuthor>
-            <S.TrackAuthorLink href="http://">{author}</S.TrackAuthorLink>
+            <S.TrackAuthorLink href="!#">{author}</S.TrackAuthorLink>
           </S.TrackAuthor>
           <S.TrackAlbum>
-            <S.TrackAlbumLink href="http://">{album}</S.TrackAlbumLink>
+            <S.TrackAlbumLink href="!#">{album}</S.TrackAlbumLink>
           </S.TrackAlbum>
           <div>
             <S.TrackTimeSvg alt="time">

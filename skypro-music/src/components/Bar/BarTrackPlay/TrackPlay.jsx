@@ -24,12 +24,12 @@ export default function TrackPlay({ isLoading }) {
             </S.TrackPlaySvg>
           </S.TrackPlayImage>
           <S.TrackPlayAuthor>
-            <S.TrackPlayAuthorLink href="http://">
+            <S.TrackPlayAuthorLink href="!#">
               Ты та...
             </S.TrackPlayAuthorLink>
           </S.TrackPlayAuthor>
           <S.TrackPlayAlbum>
-            <S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
+            <S.TrackPlayAlbumLink href="!#">Баста</S.TrackPlayAlbumLink>
           </S.TrackPlayAlbum>
         </>
       )}
