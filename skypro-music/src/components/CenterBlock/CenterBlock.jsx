@@ -1,28 +1,28 @@
-import './CenterBlock.css';
+import * as S from './CenterBlock.styles';
 import Filter from '../Filter/Filter';
 import Search from '../Search/Search';
 import Track from '../Track/Track';
 
 export default function CenterBlock({ isLoading }) {
   return (
-    <div className="main__centerblock centerblock">
+    <S.MainCenterBlock>
       <Search />
 
-      <h2 className="centerblock__h2">Треки</h2>
+      <S.CenterBlockTitle>Треки</S.CenterBlockTitle>
       <Filter />
 
-      <div className="centerblock__content">
-        <div className="content__title playlist-title">
-          <div className="playlist-title__col col01">Трек</div>
-          <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-          <div className="playlist-title__col col03">АЛЬБОМ</div>
-          <div className="playlist-title__col col04">
-            <svg className="playlist-title__svg" alt="time">
+      <S.CenterBlockContent>
+        <S.ContentTitle>
+          <S.Col01>Трек</S.Col01>
+          <S.Col02>ИСПОЛНИТЕЛЬ</S.Col02>
+          <S.Col03>АЛЬБОМ</S.Col03>
+          <S.Col04>
+            <S.PlaylistTitleSvg alt="time">
               <use xlinkHref="img/icon/sprite.svg#icon-watch" />
-            </svg>
-          </div>
-        </div>
-        <div className="content__playlist playlist">
+            </S.PlaylistTitleSvg>
+          </S.Col04>
+        </S.ContentTitle>
+        <S.ContentPlaylist>
           <Track
             track="Guilt"
             author="Nero"
@@ -156,8 +156,8 @@ export default function CenterBlock({ isLoading }) {
           />
 
           <Track isLoading={isLoading} />
-        </div>
-      </div>
-    </div>
+        </S.ContentPlaylist>
+      </S.CenterBlockContent>
+    </S.MainCenterBlock>
   );
 }

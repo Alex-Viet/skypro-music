@@ -1,40 +1,38 @@
 import Skeleton from '../../Skeleton/Skeleton';
-import '../Bar.css';
+import * as S from './TrackPlay.styles';
 
 export default function TrackPlay({ isLoading }) {
   return (
-    <div className="track-play__contain">
+    <S.TrackPlayContain>
       {isLoading ? (
         <>
-          <div className="track-play__image">
-            <Skeleton className="skeleton__track-play-image" />
-          </div>
-          <div className="track-play__author">
-            <Skeleton className="skeleton__track-play-author-album" />
-          </div>
-          <div className="track-play__album">
-            <Skeleton className="skeleton__track-play-author-album" />
-          </div>
+          <S.TrackPlayImage>
+            <Skeleton width="51px" height="51px" />
+          </S.TrackPlayImage>
+          <S.TrackPlayAuthor>
+            <Skeleton width="59px" height="15px" />
+          </S.TrackPlayAuthor>
+          <S.TrackPlayAlbum>
+            <Skeleton width="59px" height="15px" />
+          </S.TrackPlayAlbum>
         </>
       ) : (
         <>
-          <div className="track-play__image">
-            <svg className="track-play__svg" alt="music">
+          <S.TrackPlayImage>
+            <S.TrackPlaySvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note" />
-            </svg>
-          </div>
-          <div className="track-play__author">
-            <a className="track-play__author-link" href="http://">
+            </S.TrackPlaySvg>
+          </S.TrackPlayImage>
+          <S.TrackPlayAuthor>
+            <S.TrackPlayAuthorLink href="http://">
               Ты та...
-            </a>
-          </div>
-          <div className="track-play__album">
-            <a className="track-play__album-link" href="http://">
-              Баста
-            </a>
-          </div>
+            </S.TrackPlayAuthorLink>
+          </S.TrackPlayAuthor>
+          <S.TrackPlayAlbum>
+            <S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
+          </S.TrackPlayAlbum>
         </>
       )}
-    </div>
+    </S.TrackPlayContain>
   );
 }

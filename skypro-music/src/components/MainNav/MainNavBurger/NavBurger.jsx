@@ -1,17 +1,11 @@
-import '../MainNav.css';
+import * as S from '../MainNav.styles';
 
-export default function NavBurger({ toggleVisibility, handleKeyPress }) {
+export default function NavBurger({ toggleVisibility }) {
   return (
-    <div
-      className="nav__burger burger"
-      role="button"
-      tabIndex={0}
-      onClick={toggleVisibility}
-      onKeyDown={handleKeyPress}
-    >
-      <span className="burger__line" />
-      <span className="burger__line" />
-      <span className="burger__line" />
-    </div>
+    <S.NavBurger onClick={toggleVisibility}>
+      <S.BurgerLine />
+      <S.BurgerLine />
+      <S.BurgerLine />
+    </S.NavBurger>
   );
 }

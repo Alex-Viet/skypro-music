@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import Skeleton from '../Skeleton/Skeleton';
-import './Track.css';
+import * as S from './Track.styles';
 
 export default function Track({
   track,
@@ -11,55 +11,51 @@ export default function Track({
   isLoading,
 }) {
   return (
-    <div className="playlist__item">
+    <S.PlaylistItem>
       {isLoading ? (
-        <div className="skeleton__playlist-track">
-          <div className="track__title">
-            <Skeleton className="skeleton__track-title-image" />
-            <div className="track__title-text">
-              <Skeleton className="skeleton__track-title-text" />
+        <S.PlaylistTrackSkeleton>
+          <S.TrackTitle>
+            <Skeleton width="51px" height="51px" margin="17px" />
+            <div>
+              <Skeleton width="356px" height="19px" />
             </div>
-          </div>
-          <div className="track__author">
-            <Skeleton className="skeleton__track-author" />
-          </div>
-          <div className="track__album">
-            <Skeleton className="skeleton-track__album" />
-          </div>
-        </div>
+          </S.TrackTitle>
+          <S.TrackAuthor>
+            <Skeleton width="271px" height="19px" />
+          </S.TrackAuthor>
+          <S.TrackAlbum>
+            <Skeleton width="305px" height="19px" />
+          </S.TrackAlbum>
+        </S.PlaylistTrackSkeleton>
       ) : (
-        <div className="playlist__track track">
-          <div className="track__title">
-            <div className="track__title-image">
-              <svg className="track__title-svg" alt="music">
+        <S.PlaylistTrack>
+          <S.TrackTitle>
+            <S.TrackTitleImage>
+              <S.TrackTitleSvg alt="music">
                 <use xlinkHref="img/icon/sprite.svg#icon-note" />
-              </svg>
-            </div>
-            <div className="track__title-text">
-              <a className="track__title-link" href="http://">
+              </S.TrackTitleSvg>
+            </S.TrackTitleImage>
+            <div>
+              <S.TrackTitleLink href="http://">
                 {track}
-                <span className="track__title-span">{extra}</span>
-              </a>
+                <S.TrackTitleSpan>{extra}</S.TrackTitleSpan>
+              </S.TrackTitleLink>
             </div>
-          </div>
-          <div className="track__author">
-            <a className="track__author-link" href="http://">
-              {author}
-            </a>
-          </div>
-          <div className="track__album">
-            <a className="track__album-link" href="http://">
-              {album}
-            </a>
-          </div>
-          <div className="track__time">
-            <svg className="track__time-svg" alt="time">
+          </S.TrackTitle>
+          <S.TrackAuthor>
+            <S.TrackAuthorLink href="http://">{author}</S.TrackAuthorLink>
+          </S.TrackAuthor>
+          <S.TrackAlbum>
+            <S.TrackAlbumLink href="http://">{album}</S.TrackAlbumLink>
+          </S.TrackAlbum>
+          <div>
+            <S.TrackTimeSvg alt="time">
               <use xlinkHref="img/icon/sprite.svg#icon-like" />
-            </svg>
-            <span className="track__time-text">{time}</span>
+            </S.TrackTimeSvg>
+            <S.TrackTimeText>{time}</S.TrackTimeText>
           </div>
-        </div>
+        </S.PlaylistTrack>
       )}
-    </div>
+    </S.PlaylistItem>
   );
 }

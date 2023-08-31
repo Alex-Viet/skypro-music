@@ -1,5 +1,5 @@
 import Skeleton from '../Skeleton/Skeleton';
-import './Playlist.css';
+import * as S from './Playlist.styles';
 
 export function getPlaylistNumber(number) {
   return `img/playlist${number}.png`;
@@ -7,19 +7,18 @@ export function getPlaylistNumber(number) {
 
 function Playlist({ number, isLoading }) {
   return (
-    <div className="sidebar__item">
+    <S.SidebarItem>
       {isLoading ? (
-        <Skeleton className="skeleton__sidebar-item" />
+        <Skeleton width="250px" height="150px" />
       ) : (
-        <a className="sidebar__link" href="!#">
-          <img
-            className="sidebar__img"
+        <S.SidebarLink href="!#">
+          <S.SidebarImage
             src={getPlaylistNumber(number)}
             alt="day's playlist"
           />
-        </a>
+        </S.SidebarLink>
       )}
-    </div>
+    </S.SidebarItem>
   );
 }
 

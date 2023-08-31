@@ -1,5 +1,5 @@
-import './MainNav.css';
 import { useState } from 'react';
+import * as S from './MainNav.styles';
 import NavBurger from './MainNavBurger/NavBurger';
 import NavLogo from './MainNavLogo/NavLogo';
 import NavMenu from './MainNavMenu/NavMenu';
@@ -11,20 +11,11 @@ export default function MainNav() {
     setIsVisible(!isVisible);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      toggleVisibility();
-    }
-  };
-
   return (
-    <nav className="main__nav nav">
+    <S.MainNav>
       <NavLogo />
-      <NavBurger
-        toggleVisibility={toggleVisibility}
-        handleKeyPress={handleKeyPress}
-      />
+      <NavBurger toggleVisibility={toggleVisibility} />
       {isVisible && <NavMenu />}
-    </nav>
+    </S.MainNav>
   );
 }

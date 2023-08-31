@@ -1,36 +1,36 @@
-import './FilterPopup.css';
+import * as S from './FilterPopup.styles';
 
 function FilterPopupPerformer() {
   return (
-    <div className="popup filter__popup" style={{ top: '49px', left: '92px' }}>
-      <ul className="popup__list">
+    <S.FilterPopupPerformer>
+      <S.PopupList>
         <li key="1">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Michael Jackson
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="2">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Frank Sinatra
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="3">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Calvin Harris
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="4">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Zhu
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="5">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             Arctic Monkeys
-          </a>
+          </S.PopupTextLink>
         </li>
-      </ul>
-    </div>
+      </S.PopupList>
+    </S.FilterPopupPerformer>
   );
 }
 

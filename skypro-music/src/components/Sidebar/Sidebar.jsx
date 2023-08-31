@@ -1,25 +1,25 @@
 import Playlist from '../Playlist/Playlist';
-import './Sidebar.css';
+import * as S from './Sidebar.styles';
 
 function Sidebar({ isLoading }) {
   return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
-        <div className="sidebar__icon">
+    <S.MainSidebar>
+      <S.SidebarPersonal>
+        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+        <S.SidebarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>
-        </div>
-      </div>
-      <div className="sidebar__block">
-        <div className="sidebar__list">
+        </S.SidebarIcon>
+      </S.SidebarPersonal>
+      <S.SidebarBlock>
+        <S.SidebarList>
           <Playlist number="01" isLoading={isLoading} />
           <Playlist number="02" isLoading={isLoading} />
           <Playlist number="03" isLoading={isLoading} />
-        </div>
-      </div>
-    </div>
+        </S.SidebarList>
+      </S.SidebarBlock>
+    </S.MainSidebar>
   );
 }
 

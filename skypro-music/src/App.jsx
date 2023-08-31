@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import * as S from './App.styles';
 import Bar from './components/Bar/Bar';
 import CenterBlock from './components/CenterBlock/CenterBlock';
 import MainNav from './components/MainNav/MainNav';
@@ -15,19 +15,22 @@ function App() {
   }, []);
 
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
-          <MainNav />
-          <CenterBlock isLoading={isLoading} />
-          <Sidebar isLoading={isLoading} />
-        </main>
-        <div className="bar">
-          <Bar isLoading={isLoading} />
-        </div>
-        <footer className="footer" />
-      </div>
-    </div>
+    <>
+      <S.GlobalStyles />
+      <S.Wrapper>
+        <S.Container>
+          <S.Main>
+            <MainNav />
+            <CenterBlock isLoading={isLoading} />
+            <Sidebar isLoading={isLoading} />
+          </S.Main>
+          <S.Bar>
+            <Bar isLoading={isLoading} />
+          </S.Bar>
+          <footer />
+        </S.Container>
+      </S.Wrapper>
+    </>
   );
 }
 

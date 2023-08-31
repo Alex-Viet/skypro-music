@@ -1,26 +1,26 @@
-import './FilterPopup.css';
+import * as S from './FilterPopup.styles';
 
 function FilterPopupYear() {
   return (
-    <div className="popup filter__popup" style={{ top: '49px', left: '240px' }}>
-      <ul className="popup__list">
+    <S.FilterPopupYear>
+      <S.PopupList>
         <li key="1">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             1992
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="2">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             1993
-          </a>
+          </S.PopupTextLink>
         </li>
         <li key="3">
-          <a className="popup__text" href="#!">
+          <S.PopupTextLink href="#!">
             1994
-          </a>
+          </S.PopupTextLink>
         </li>
-      </ul>
-    </div>
+      </S.PopupList>
+    </S.FilterPopupYear>
   );
 }
 
