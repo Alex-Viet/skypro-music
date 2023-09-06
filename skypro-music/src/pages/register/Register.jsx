@@ -5,7 +5,7 @@ function Register() {
   return (
     <div>
       <TemporaryStyledTitle>Страница с регистрацией</TemporaryStyledTitle>
-      <Link to="/">Назад</Link>
+      <Link to="/login">Назад к авторизации</Link>
     </div>
   );
 }

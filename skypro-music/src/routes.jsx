@@ -5,16 +5,35 @@ import Category from './pages/category/Category';
 import Favorites from './pages/favorites/Favorites';
 import MainPage from './pages/main-page/MainPage';
 import NotFound from './pages/not-found-404/NotFound';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
-function AppRoutes() {
+function AppRoutes({ user }) {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/category/:id" element={<Category />} />
       <Route path="*" element={<NotFound />} />
+
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}><MainPage /></ProtectedRoute>
+      }
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}><Favorites /></ProtectedRoute>
+      }
+      />
+
+      <Route
+        path="/category/:id"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}><Category /></ProtectedRoute>
+      }
+      />
     </Routes>
   );
 }

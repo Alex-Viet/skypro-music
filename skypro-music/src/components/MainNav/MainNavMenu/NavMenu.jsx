@@ -1,6 +1,17 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from '../MainNav.styles';
 
 export default function NavMenu() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
+  const handleLogout = () => {
+    setUser(localStorage.clear());
+    navigate('/login', { replace: true });
+  };
+
   return (
     <S.NavMenu>
       <S.MenuList>
@@ -10,8 +21,12 @@ export default function NavMenu() {
         <S.MenuItem>
           <S.MenuLink to="/favorites">Мой плейлист</S.MenuLink>
         </S.MenuItem>
-        <S.MenuItem>
-          <S.MenuLink to="/login">Войти</S.MenuLink>
+        <S.MenuItem user={user}>
+          {localStorage.getItem('user') ? (
+            <S.MenuLink onClick={handleLogout}>Выйти</S.MenuLink>
+          ) : (
+            <S.MenuLink onClick={handleLogin}>Войти</S.MenuLink>
+          )}
         </S.MenuItem>
       </S.MenuList>
     </S.NavMenu>
