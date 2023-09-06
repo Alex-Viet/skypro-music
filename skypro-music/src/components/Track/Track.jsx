@@ -15,7 +15,7 @@ export default function Track({
       {isLoading ? (
         <S.PlaylistTrackSkeleton>
           <S.TrackTitle>
-            <Skeleton width="51px" height="51px" margin="17px" />
+            <Skeleton width="51px" height="51px" margin="0 17px 0 0" />
             <div>
               <Skeleton width="356px" height="19px" />
             </div>

@@ -13,7 +13,7 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/favorites" element={<Favorites />} />
-      <Route path="/category" element={<Category />} />
+      <Route path="/category/:id" element={<Category />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

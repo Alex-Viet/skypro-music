@@ -1,3 +1,4 @@
+import { PLAYLISTS } from '../../playlists';
 import Playlist from '../Playlist/Playlist';
 import * as S from './Sidebar.styles';
 
@@ -14,9 +15,7 @@ function Sidebar({ isLoading }) {
       </S.SidebarPersonal>
       <S.SidebarBlock>
         <S.SidebarList>
-          <Playlist number="01" isLoading={isLoading} />
-          <Playlist number="02" isLoading={isLoading} />
-          <Playlist number="03" isLoading={isLoading} />
+          <Playlist isLoading={isLoading} playlists={PLAYLISTS} />
         </S.SidebarList>
       </S.SidebarBlock>
     </S.MainSidebar>

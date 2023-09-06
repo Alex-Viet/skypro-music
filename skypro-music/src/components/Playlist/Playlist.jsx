@@ -1,3 +1,4 @@
+import { PLAYLISTS } from '../../playlists';
 import Skeleton from '../Skeleton/Skeleton';
 import * as S from './Playlist.styles';
 
@@ -5,19 +6,26 @@ export function getPlaylistNumber(number) {
   return `img/playlist${number}.png`;
 }
 
-function Playlist({ number, isLoading }) {
+function Playlist({ isLoading }) {
   return (
     <S.SidebarItem>
-      {isLoading ? (
-        <Skeleton width="250px" height="150px" />
-      ) : (
-        <S.SidebarLink href="!#">
-          <S.SidebarImage
-            src={getPlaylistNumber(number)}
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
-      )}
+      {PLAYLISTS.map((playlist) => {
+        if (isLoading) {
+          return (
+            <Skeleton
+              width="250px"
+              height="150px"
+              margin="0 0 30px 0"
+              key={playlist.id}
+            />
+          );
+        }
+        return (
+          <S.SidebarLink to={`/category/${playlist.id}`} key={playlist.id}>
+            <S.SidebarImage src={playlist.img} alt="day's playlist" />
+          </S.SidebarLink>
+        );
+      })}
     </S.SidebarItem>
   );
 }
