@@ -1,35 +1,25 @@
-import { useEffect, useState } from 'react';
-import * as S from './App.styles';
-import Bar from './components/Bar/Bar';
-import CenterBlock from './components/CenterBlock/CenterBlock';
-import MainNav from './components/MainNav/MainNav';
-import Sidebar from './components/Sidebar/Sidebar';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import GlobalStyles from './App.styles';
+import AppRoutes from './routes';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
+  const handleLogout = () => {
+    setUser(localStorage.clear());
+    navigate('/login', { replace: true });
+  };
 
   return (
     <>
-      <S.GlobalStyles />
-      <S.Wrapper>
-        <S.Container>
-          <S.Main>
-            <MainNav />
-            <CenterBlock isLoading={isLoading} />
-            <Sidebar isLoading={isLoading} />
-          </S.Main>
-          <S.Bar>
-            <Bar isLoading={isLoading} />
-          </S.Bar>
-          <footer />
-        </S.Container>
-      </S.Wrapper>
+      <GlobalStyles />
+      <AppRoutes
+        user={user}
+        onAuthButtonClick={user ? handleLogout : handleLogin}
+      />
     </>
   );
 }

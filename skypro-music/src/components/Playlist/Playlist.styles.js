@@ -1,15 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const SidebarItem = styled.div`
   width: 250px;
   height: 150px;
-
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
 `;
 
-export const SidebarLink = styled.a`
+export const SidebarLink = styled(NavLink)`
   width: 100%;
   height: 100%;
 `;
@@ -17,4 +14,5 @@ export const SidebarLink = styled.a`
 export const SidebarImage = styled.img`
   width: 100%;
   height: auto;
+  margin-bottom: 30px;
 `;

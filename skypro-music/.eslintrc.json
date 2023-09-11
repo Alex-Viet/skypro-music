@@ -24,6 +24,9 @@
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "linebreak-style": 0,
-    "object-curly-newline": ["error", "never"]
+    "object-curly-newline": ["error", "never"],
+    "arrow-body-style": "off",
+    "react/function-component-definition": "off",
+    "import/prefer-default-export": ["off", { "target": "any" }]
   }
 }
