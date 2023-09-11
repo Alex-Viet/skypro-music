@@ -21,11 +21,15 @@ export default function NavMenu() {
         <S.MenuItem>
           <S.MenuLink to="/favorites">Мой плейлист</S.MenuLink>
         </S.MenuItem>
-        <S.MenuItem user={user}>
+        <S.MenuItem>
           {localStorage.getItem('user') ? (
-            <S.MenuLink onClick={handleLogout}>Выйти</S.MenuLink>
+            <S.MenuLink user={user} onClick={handleLogout}>
+              Выйти
+            </S.MenuLink>
           ) : (
-            <S.MenuLink onClick={handleLogin}>Войти</S.MenuLink>
+            <S.MenuLink user={user} onClick={handleLogin}>
+              Войти
+            </S.MenuLink>
           )}
         </S.MenuItem>
       </S.MenuList>
