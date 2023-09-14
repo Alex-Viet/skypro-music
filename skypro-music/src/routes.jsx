@@ -7,7 +7,7 @@ import MainPage from './pages/main-page/MainPage';
 import NotFound from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
-function AppRoutes({ user }) {
+function AppRoutes({ user, tracks }) {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -16,23 +16,29 @@ function AppRoutes({ user }) {
 
       <Route
         path="/"
-        element={
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}><MainPage /></ProtectedRoute>
-      }
+        element={(
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <MainPage tracks={tracks} />
+          </ProtectedRoute>
+        )}
       />
 
       <Route
         path="/favorites"
-        element={
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}><Favorites /></ProtectedRoute>
-      }
+        element={(
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <Favorites />
+          </ProtectedRoute>
+        )}
       />
 
       <Route
         path="/category/:id"
-        element={
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}><Category /></ProtectedRoute>
-      }
+        element={(
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <Category />
+          </ProtectedRoute>
+        )}
       />
     </Routes>
   );

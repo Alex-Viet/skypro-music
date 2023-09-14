@@ -1,15 +1,8 @@
-/* eslint-disable object-curly-newline */
+import { formatTrackTime } from '../../utils/utils';
 import Skeleton from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
-export default function Track({
-  track,
-  extra,
-  author,
-  album,
-  time,
-  isLoading,
-}) {
+export function Track({ isLoading, tracks }) {
   return (
     <S.PlaylistItem>
       {isLoading ? (
@@ -28,33 +21,39 @@ export default function Track({
           </S.TrackAlbum>
         </S.PlaylistTrackSkeleton>
       ) : (
-        <S.PlaylistTrack>
-          <S.TrackTitle>
-            <S.TrackTitleImage>
-              <S.TrackTitleSvg alt="music">
-                <use xlinkHref="img/icon/sprite.svg#icon-note" />
-              </S.TrackTitleSvg>
-            </S.TrackTitleImage>
-            <div>
-              <S.TrackTitleLink href="!#">
-                {track}
-                <S.TrackTitleSpan>{extra}</S.TrackTitleSpan>
-              </S.TrackTitleLink>
-            </div>
-          </S.TrackTitle>
-          <S.TrackAuthor>
-            <S.TrackAuthorLink href="!#">{author}</S.TrackAuthorLink>
-          </S.TrackAuthor>
-          <S.TrackAlbum>
-            <S.TrackAlbumLink href="!#">{album}</S.TrackAlbumLink>
-          </S.TrackAlbum>
-          <div>
-            <S.TrackTimeSvg alt="time">
-              <use xlinkHref="img/icon/sprite.svg#icon-like" />
-            </S.TrackTimeSvg>
-            <S.TrackTimeText>{time}</S.TrackTimeText>
-          </div>
-        </S.PlaylistTrack>
+        tracks.map((track) => {
+          return (
+            <S.PlaylistTrack key={track.id}>
+              <S.TrackTitle>
+                <S.TrackTitleImage>
+                  <S.TrackTitleSvg alt="music">
+                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                  </S.TrackTitleSvg>
+                </S.TrackTitleImage>
+                <div>
+                  <S.TrackTitleLink href="!#">
+                    {track.name}
+                    <S.TrackTitleSpan />
+                  </S.TrackTitleLink>
+                </div>
+              </S.TrackTitle>
+              <S.TrackAuthor>
+                <S.TrackAuthorLink href="!#">{track.author}</S.TrackAuthorLink>
+              </S.TrackAuthor>
+              <S.TrackAlbum>
+                <S.TrackAlbumLink href="!#">{track.album}</S.TrackAlbumLink>
+              </S.TrackAlbum>
+              <div>
+                <S.TrackTimeSvg alt="time">
+                  <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                </S.TrackTimeSvg>
+                <S.TrackTimeText>
+                  {formatTrackTime(track.duration_in_seconds)}
+                </S.TrackTimeText>
+              </div>
+            </S.PlaylistTrack>
+          );
+        })
       )}
     </S.PlaylistItem>
   );
