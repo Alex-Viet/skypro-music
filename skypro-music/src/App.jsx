@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTracks } from './api';
 import GlobalStyles from './App.styles';
-import AppRoutes from './Routes';
+import { AppRoutes } from './Routes';
 
-function App() {
+export function App() {
   const [user, setUser] = useState(null);
   const [tracks, setTracks] = useState([]);
   const navigate = useNavigate();
@@ -36,5 +36,3 @@ function App() {
     </>
   );
 }
-
-export default App;

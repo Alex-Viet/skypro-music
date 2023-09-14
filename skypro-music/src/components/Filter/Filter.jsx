@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import * as S from './Filter.styles';
-import FilterPopupPerformer from './FilterPopup/FilterPopupPerformer';
-import FilterPopupYear from './FilterPopup/FilterPopupYear';
-import FilterPopupGenre from './FilterPopup/FilterPopupGenre';
+import { FilterPopupPerformer } from './FilterPopupPerformer';
+import { FilterPopupYear } from './FilterPopupYear';
+import { FilterPopupGenre } from './FilterPopupGenre';
 
-function Filter() {
+export function Filter() {
   const [activeFilter, setActiveFilter] = useState(null);
 
   const filters = [
@@ -36,5 +36,3 @@ function Filter() {
     </S.CenterBlockFilter>
   );
 }
-
-export default Filter;

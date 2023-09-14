@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import * as S from './MainPage.styles';
-import Bar from '../../components/Bar/Bar';
-import CenterBlock from '../../components/CenterBlock/CenterBlock';
-import MainNav from '../../components/MainNav/MainNav';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import { Bar } from '../../components/Bar/Bar';
+import { CenterBlock } from '../../components/CenterBlock/CenterBlock';
+import { MainNav } from '../../components/MainNav/MainNav';
+import { Sidebar } from '../../components/Sidebar/Sidebar';
 
-function MainPage({ tracks }) {
+export function MainPage({ tracks }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -30,5 +30,3 @@ function MainPage({ tracks }) {
     </S.Wrapper>
   );
 }
-
-export default MainPage;

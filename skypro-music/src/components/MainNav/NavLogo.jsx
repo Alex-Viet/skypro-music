@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import * as S from '../MainNav.styles';
+import * as S from './MainNav.styles';
 
-export default function NavLogo() {
+export function NavLogo() {
   return (
     <S.NavLogo>
       <Link to="/">

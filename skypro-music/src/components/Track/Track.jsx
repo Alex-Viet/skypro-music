@@ -1,5 +1,5 @@
 import { formatTrackTime } from '../../utils/utils';
-import Skeleton from '../Skeleton/Skeleton';
+import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
 export function Track({ isLoading, tracks }) {

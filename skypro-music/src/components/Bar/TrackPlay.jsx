@@ -1,7 +1,7 @@
-import Skeleton from '../../Skeleton/Skeleton';
+import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './TrackPlay.styles';
 
-export default function TrackPlay({ isLoading }) {
+export function TrackPlay({ isLoading }) {
   return (
     <S.TrackPlayContain>
       {isLoading ? (
@@ -24,9 +24,7 @@ export default function TrackPlay({ isLoading }) {
             </S.TrackPlaySvg>
           </S.TrackPlayImage>
           <S.TrackPlayAuthor>
-            <S.TrackPlayAuthorLink href="!#">
-              Ты та...
-            </S.TrackPlayAuthorLink>
+            <S.TrackPlayAuthorLink href="!#">Ты та...</S.TrackPlayAuthorLink>
           </S.TrackPlayAuthor>
           <S.TrackPlayAlbum>
             <S.TrackPlayAlbumLink href="!#">Баста</S.TrackPlayAlbumLink>

@@ -1,6 +1,6 @@
 import * as S from './Search.styles';
 
-export default function Search() {
+export function Search() {
   return (
     <S.CenterBlockSearch>
       <S.SearchSvg>

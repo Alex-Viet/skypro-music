@@ -1,9 +1,9 @@
 import * as S from './CenterBlock.styles';
-import Filter from '../Filter/Filter';
-import Search from '../Search/Search';
+import { Filter } from '../Filter/Filter';
+import { Search } from '../Search/Search';
 import { Track } from '../Track/Track';
 
-export default function CenterBlock({ isLoading, tracks }) {
+export function CenterBlock({ isLoading, tracks }) {
   return (
     <S.MainCenterBlock>
       <Search />

@@ -1,8 +1,8 @@
 import { PLAYLISTS } from '../../playlists';
-import Playlist from '../Playlist/Playlist';
+import { Playlist } from '../Playlist/Playlist';
 import * as S from './Sidebar.styles';
 
-function Sidebar({ isLoading }) {
+export function Sidebar({ isLoading }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
@@ -21,5 +21,3 @@ function Sidebar({ isLoading }) {
     </S.MainSidebar>
   );
 }
-
-export default Sidebar;

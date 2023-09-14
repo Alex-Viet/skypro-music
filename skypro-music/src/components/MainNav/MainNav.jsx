@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import * as S from './MainNav.styles';
-import NavBurger from './MainNavBurger/NavBurger';
-import NavLogo from './MainNavLogo/NavLogo';
-import NavMenu from './MainNavMenu/NavMenu';
+import { NavBurger } from './NavBurger';
+import { NavLogo } from './NavLogo';
+import { NavMenu } from './NavMenu';
 
-export default function MainNav() {
+export function MainNav() {
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => {

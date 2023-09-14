@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import TemporaryStyledTitle from '../TemporaryStyles';
 
-function Register() {
+export function Register() {
   return (
     <div>
       <TemporaryStyledTitle>Страница с регистрацией</TemporaryStyledTitle>
@@ -9,5 +9,3 @@ function Register() {
     </div>
   );
 }
-
-export default Register;

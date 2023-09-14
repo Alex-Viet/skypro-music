@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import TemporaryStyledTitle from '../TemporaryStyles';
 
-function Login() {
+export function Login() {
   const navigate = useNavigate();
 
   const setUser = () => {
@@ -20,5 +20,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

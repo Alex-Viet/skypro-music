@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PLAYLISTS } from '../../playlists';
 import TemporaryStyledTitle from '../TemporaryStyles';
 
-function Category() {
+export function Category() {
   const params = useParams();
   const playlistId = PLAYLISTS.find(
     (playlist) => playlist.id === Number(params.id),
@@ -19,5 +19,3 @@ function Category() {
     </div>
   );
 }
-
-export default Category;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from '../MainNav.styles';
+import * as S from './MainNav.styles';
 
-export default function NavMenu() {
+export function NavMenu() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 

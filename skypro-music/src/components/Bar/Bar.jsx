@@ -1,8 +1,8 @@
 import * as S from './Bar.styles';
-import PlayerControls from './BarPlayerControls/PlayerControls';
-import TrackPlay from './BarTrackPlay/TrackPlay';
+import { PlayerControls } from './PlayerControls';
+import { TrackPlay } from './TrackPlay';
 
-function Bar({ isLoading }) {
+export function Bar({ isLoading }) {
   return (
     <S.BarContent>
       <S.BarPlayerProgress />
@@ -47,5 +47,3 @@ function Bar({ isLoading }) {
     </S.BarContent>
   );
 }
-
-export default Bar;
