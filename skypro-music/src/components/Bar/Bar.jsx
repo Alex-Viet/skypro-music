@@ -2,7 +2,7 @@ import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
 import { TrackPlay } from './TrackPlay';
 
-export function Bar({ isLoading }) {
+export function Bar({ currentTrack }) {
   return (
     <S.BarContent>
       <S.BarPlayerProgress />
@@ -11,7 +11,7 @@ export function Bar({ isLoading }) {
           <PlayerControls />
 
           <S.PlayerTrackPlay>
-            <TrackPlay isLoading={isLoading} />
+            <TrackPlay currentTrack={currentTrack} />
 
             <S.TrackPlayLikeDis>
               <S.TrackPlayLike className="_btn-icon">

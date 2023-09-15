@@ -2,7 +2,7 @@ import { formatTrackTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
-export function Track({ isLoading, tracks }) {
+export function Track({ isLoading, tracks, setCurrentTrack }) {
   return (
     <S.PlaylistItem>
       {isLoading ? (
@@ -75,7 +75,7 @@ export function Track({ isLoading, tracks }) {
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>
                 <div>
-                  <S.TrackTitleLink href="!#">
+                  <S.TrackTitleLink onClick={() => setCurrentTrack(track)}>
                     {track.name}
                     <S.TrackTitleSpan />
                   </S.TrackTitleLink>

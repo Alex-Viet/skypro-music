@@ -7,7 +7,7 @@ import { MainPage } from './pages/main-page/MainPage';
 import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
-export function AppRoutes({ user, tracks, isLoading }) {
+export function AppRoutes({ user, tracks, isLoading, setCurrentTrack }) {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -18,7 +18,11 @@ export function AppRoutes({ user, tracks, isLoading }) {
         path="/"
         element={(
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <MainPage tracks={tracks} isLoading={isLoading} />
+            <MainPage
+              tracks={tracks}
+              isLoading={isLoading}
+              setCurrentTrack={setCurrentTrack}
+            />
           </ProtectedRoute>
         )}
       />

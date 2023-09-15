@@ -10,6 +10,8 @@ export function App() {
   const [user, setUser] = useState(null);
   const [tracks, setTracks] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentTrack, setCurrentTrack] = useState(null);
 
   useEffect(() => {
     async function handleGetTracks() {
@@ -27,8 +29,6 @@ export function App() {
     navigate('/login', { replace: true });
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
 
@@ -45,10 +45,13 @@ export function App() {
             onAuthButtonClick={user ? handleLogout : handleLogin}
             tracks={tracks}
             isLoading={isLoading}
+            setCurrentTrack={setCurrentTrack}
           />
-          <S.Bar>
-            <Bar isLoading={isLoading} />
-          </S.Bar>
+          {currentTrack ? (
+            <S.Bar>
+              <Bar currentTrack={currentTrack} />
+            </S.Bar>
+          ) : null}
           <footer />
         </S.Container>
       </S.Wrapper>
