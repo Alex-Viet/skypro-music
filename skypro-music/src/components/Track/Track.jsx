@@ -2,7 +2,7 @@ import { formatTrackTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
-export function Track({ isLoading, tracks, setCurrentTrack }) {
+export function Track({ isLoading, tracks, setCurrentTrack, trackListError }) {
   return (
     <S.PlaylistItem>
       {isLoading ? (
@@ -64,7 +64,7 @@ export function Track({ isLoading, tracks, setCurrentTrack }) {
             </S.TrackAlbum>
           </S.PlaylistTrackSkeleton>
         </>
-      ) : (
+      ) : trackListError === null ? (
         tracks.map((track) => {
           return (
             <S.PlaylistTrack key={track.id}>
@@ -98,6 +98,12 @@ export function Track({ isLoading, tracks, setCurrentTrack }) {
             </S.PlaylistTrack>
           );
         })
+      ) : (
+        <h3>
+          Не удалось загрузить плейлист, попробуйте позже. Ошибка:
+          {'  '}
+          {trackListError}
+        </h3>
       )}
     </S.PlaylistItem>
   );

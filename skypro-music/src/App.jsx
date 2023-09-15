@@ -12,12 +12,18 @@ export function App() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
+  const [trackListError, setTrackListError] = useState(null);
 
   useEffect(() => {
     async function handleGetTracks() {
-      await getTracks().then((data) => {
-        setTracks(data);
-      });
+      try {
+        setTrackListError(null);
+        await getTracks().then((data) => {
+          setTracks(data);
+        });
+      } catch (error) {
+        setTrackListError(error.message);
+      }
     }
 
     handleGetTracks();
@@ -47,6 +53,7 @@ export function App() {
             tracks={tracks}
             isLoading={isLoading}
             setCurrentTrack={setCurrentTrack}
+            trackListError={trackListError}
           />
 
           {currentTrack ? (

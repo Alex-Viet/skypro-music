@@ -8,9 +8,9 @@ export function Sidebar({ isLoading }) {
       <S.SidebarPersonal>
         <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
         <S.SidebarIcon>
-          <svg alt="logout">
+          <S.SidebarLogoutSvg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
-          </svg>
+          </S.SidebarLogoutSvg>
         </S.SidebarIcon>
       </S.SidebarPersonal>
       <S.SidebarBlock>

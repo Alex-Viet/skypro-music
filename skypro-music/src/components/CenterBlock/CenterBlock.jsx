@@ -3,7 +3,7 @@ import { Filter } from '../Filter/Filter';
 import { Search } from '../Search/Search';
 import { Track } from '../Track/Track';
 
-export function CenterBlock({ isLoading, tracks, setCurrentTrack }) {
+export function CenterBlock({ isLoading, tracks, setCurrentTrack, trackListError }) {
   return (
     <S.MainCenterBlock>
       <Search />
@@ -27,6 +27,7 @@ export function CenterBlock({ isLoading, tracks, setCurrentTrack }) {
             isLoading={isLoading}
             tracks={tracks}
             setCurrentTrack={setCurrentTrack}
+            trackListError={trackListError}
           />
         </S.ContentPlaylist>
       </S.CenterBlockContent>
