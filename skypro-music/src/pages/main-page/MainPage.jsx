@@ -6,7 +6,7 @@ import { Sidebar } from '../../components/Sidebar/Sidebar';
 export function MainPage({ tracks, isLoading, setCurrentTrack }) {
   return (
     <S.Main>
-      <MainNav />
+      <MainNav setCurrentTrack={setCurrentTrack} />
       <CenterBlock
         isLoading={isLoading}
         tracks={tracks}

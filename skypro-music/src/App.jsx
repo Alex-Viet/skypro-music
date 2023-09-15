@@ -26,6 +26,7 @@ export function App() {
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
   const handleLogout = () => {
     setUser(localStorage.clear());
+    setCurrentTrack(null);
     navigate('/login', { replace: true });
   };
 
