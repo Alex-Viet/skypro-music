@@ -48,8 +48,15 @@ export function App() {
             isLoading={isLoading}
             setCurrentTrack={setCurrentTrack}
           />
+
           {currentTrack ? (
             <S.Bar>
+              <audio
+                controls
+                src={currentTrack ? currentTrack.track_file : null}
+              >
+                <track kind="captions" />
+              </audio>
               <Bar currentTrack={currentTrack} />
             </S.Bar>
           ) : null}
