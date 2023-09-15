@@ -6,20 +6,64 @@ export function Track({ isLoading, tracks }) {
   return (
     <S.PlaylistItem>
       {isLoading ? (
-        <S.PlaylistTrackSkeleton>
-          <S.TrackTitle>
-            <Skeleton width="51px" height="51px" margin="0 17px 0 0" />
-            <div>
-              <Skeleton width="356px" height="19px" />
-            </div>
-          </S.TrackTitle>
-          <S.TrackAuthor>
-            <Skeleton width="271px" height="19px" />
-          </S.TrackAuthor>
-          <S.TrackAlbum>
-            <Skeleton width="305px" height="19px" />
-          </S.TrackAlbum>
-        </S.PlaylistTrackSkeleton>
+        <>
+          <S.PlaylistTrackSkeleton>
+            <S.TrackTitle>
+              <Skeleton width="51px" height="51px" margin="0 17px 12px 0" />
+              <div>
+                <Skeleton width="356px" height="19px" />
+              </div>
+            </S.TrackTitle>
+            <S.TrackAuthor>
+              <Skeleton width="271px" height="19px" />
+            </S.TrackAuthor>
+            <S.TrackAlbum>
+              <Skeleton width="305px" height="19px" />
+            </S.TrackAlbum>
+          </S.PlaylistTrackSkeleton>
+          <S.PlaylistTrackSkeleton>
+            <S.TrackTitle>
+              <Skeleton width="51px" height="51px" margin="0 17px 12px 0" />
+              <div>
+                <Skeleton width="356px" height="19px" />
+              </div>
+            </S.TrackTitle>
+            <S.TrackAuthor>
+              <Skeleton width="271px" height="19px" />
+            </S.TrackAuthor>
+            <S.TrackAlbum>
+              <Skeleton width="305px" height="19px" />
+            </S.TrackAlbum>
+          </S.PlaylistTrackSkeleton>
+          <S.PlaylistTrackSkeleton>
+            <S.TrackTitle>
+              <Skeleton width="51px" height="51px" margin="0 17px 12px 0" />
+              <div>
+                <Skeleton width="356px" height="19px" />
+              </div>
+            </S.TrackTitle>
+            <S.TrackAuthor>
+              <Skeleton width="271px" height="19px" />
+            </S.TrackAuthor>
+            <S.TrackAlbum>
+              <Skeleton width="305px" height="19px" />
+            </S.TrackAlbum>
+          </S.PlaylistTrackSkeleton>
+          <S.PlaylistTrackSkeleton>
+            <S.TrackTitle>
+              <Skeleton width="51px" height="51px" margin="0 17px 12px 0" />
+              <div>
+                <Skeleton width="356px" height="19px" />
+              </div>
+            </S.TrackTitle>
+            <S.TrackAuthor>
+              <Skeleton width="271px" height="19px" />
+            </S.TrackAuthor>
+            <S.TrackAlbum>
+              <Skeleton width="305px" height="19px" />
+            </S.TrackAlbum>
+          </S.PlaylistTrackSkeleton>
+        </>
       ) : (
         tracks.map((track) => {
           return (

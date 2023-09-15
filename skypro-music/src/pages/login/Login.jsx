@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import TemporaryStyledTitle from '../TemporaryStyles';
 
 export function Login() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export function Login() {
 
   return (
     <div>
-      <TemporaryStyledTitle>Страница с логином</TemporaryStyledTitle>
+      <h1>Страница с логином</h1>
       <Link to="/" onClick={setUser}>
         Войти
       </Link>

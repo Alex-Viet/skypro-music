@@ -1,6 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
 import { PLAYLISTS } from '../../playlists';
-import TemporaryStyledTitle from '../TemporaryStyles';
 
 export function Category() {
   const params = useParams();
@@ -10,11 +9,11 @@ export function Category() {
 
   return (
     <div>
-      <TemporaryStyledTitle>
+      <h1>
         Подборка
         {' '}
         {playlistId.id}
-      </TemporaryStyledTitle>
+      </h1>
       <Link to="/">Назад</Link>
     </div>
   );

@@ -24,10 +24,6 @@ export function CenterBlock({ isLoading, tracks }) {
         </S.ContentTitle>
         <S.ContentPlaylist>
           <Track
-            track="Guilt"
-            author="Nero"
-            album="Welcome Reality"
-            time="4:44"
             isLoading={isLoading}
             tracks={tracks}
           />
