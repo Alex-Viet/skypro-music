@@ -1,12 +1,8 @@
 import { PLAYLISTS } from '../../playlists';
-import Skeleton from '../Skeleton/Skeleton';
+import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Playlist.styles';
 
-export function getPlaylistNumber(number) {
-  return `img/playlist${number}.png`;
-}
-
-function Playlist({ isLoading }) {
+export function Playlist({ isLoading }) {
   return (
     <S.SidebarItem>
       {PLAYLISTS.map((playlist) => {
@@ -29,5 +25,3 @@ function Playlist({ isLoading }) {
     </S.SidebarItem>
   );
 }
-
-export default Playlist;

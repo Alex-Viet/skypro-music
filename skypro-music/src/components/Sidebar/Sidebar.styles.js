@@ -39,6 +39,11 @@ export const SidebarIcon = styled.div`
   cursor: pointer;
 `;
 
+export const SidebarLogoutSvg = styled.svg`
+  width: inherit;
+  height: inherit;
+`;
+
 export const SidebarBlock = styled.div`
   height: 100%;
   padding: 240px 0 0 0;

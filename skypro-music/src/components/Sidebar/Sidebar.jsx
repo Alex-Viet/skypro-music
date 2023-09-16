@@ -1,16 +1,16 @@
 import { PLAYLISTS } from '../../playlists';
-import Playlist from '../Playlist/Playlist';
+import { Playlist } from '../Playlist/Playlist';
 import * as S from './Sidebar.styles';
 
-function Sidebar({ isLoading }) {
+export function Sidebar({ isLoading }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
         <S.SidebarIcon>
-          <svg alt="logout">
+          <S.SidebarLogoutSvg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
-          </svg>
+          </S.SidebarLogoutSvg>
         </S.SidebarIcon>
       </S.SidebarPersonal>
       <S.SidebarBlock>
@@ -21,5 +21,3 @@ function Sidebar({ isLoading }) {
     </S.MainSidebar>
   );
 }
-
-export default Sidebar;

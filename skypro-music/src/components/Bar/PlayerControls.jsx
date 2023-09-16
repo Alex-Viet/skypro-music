@@ -1,6 +1,6 @@
 import * as S from './PlayerControls.styles';
 
-export default function PlayerControls() {
+export function PlayerControls() {
   return (
     <S.PlayerControls>
       <S.PlayerBtnPrev>

@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
-import TemporaryStyledTitle from '../TemporaryStyles';
 
-function Register() {
+export function Register() {
   return (
     <div>
-      <TemporaryStyledTitle>Страница с регистрацией</TemporaryStyledTitle>
+      <h1>Страница с регистрацией</h1>
       <Link to="/login">Назад к авторизации</Link>
     </div>
   );
 }
-
-export default Register;

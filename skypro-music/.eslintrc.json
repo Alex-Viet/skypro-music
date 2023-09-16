@@ -27,6 +27,7 @@
     "object-curly-newline": ["error", "never"],
     "arrow-body-style": "off",
     "react/function-component-definition": "off",
-    "import/prefer-default-export": ["off", { "target": "any" }]
+    "import/prefer-default-export": ["off", { "target": "any" }],
+    "no-nested-ternary": 0
   }
 }

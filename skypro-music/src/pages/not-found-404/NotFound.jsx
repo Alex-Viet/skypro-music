@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
-import TemporaryStyledTitle from '../TemporaryStyles';
 
-function NotFound() {
+export function NotFound() {
   return (
     <div>
-      <TemporaryStyledTitle>Ошибка 404</TemporaryStyledTitle>
+      <h1>Ошибка 404</h1>
       <Link to="/">Назад</Link>
     </div>
   );
 }
-
-export default NotFound;

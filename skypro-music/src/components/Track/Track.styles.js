@@ -54,6 +54,7 @@ export const TrackTitleImage = styled.div`
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 17px;
+  margin-bottom: 12px;
 `;
 
 export const TrackTitleSvg = styled.svg`
