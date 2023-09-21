@@ -1,10 +1,50 @@
+import { useEffect, useRef, useState } from 'react';
 import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
 import { TrackPlay } from './TrackPlay';
 
-export function Bar({ currentTrack, togglePlay, isPlaying, toggleLoop, isLooping }) {
+export function Bar({ currentTrack }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
+
+  // Audio-player
+  const audioRef = useRef(null);
+
+  const handleStart = () => {
+    audioRef.current.play();
+    setIsPlaying(true);
+  };
+
+  const handleStop = () => {
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+
+  const togglePlay = isPlaying ? handleStop : handleStart;
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      // handleStart();        ВЕРНУТЬ ОБРАТНО!!!!!
+    }
+  }, [currentTrack]);
+
+  const toggleLoop = () => {
+    if (audioRef.current) {
+      audioRef.current.loop = !isLooping;
+      setIsLooping(!isLooping);
+    }
+  };
+
   return (
     <S.BarContent>
+      <audio
+        controls
+        src={currentTrack ? currentTrack.track_file : null}
+        ref={audioRef}
+      >
+        <track kind="captions" />
+      </audio>
       <S.BarPlayerProgress />
       <S.BarPlayerBlock>
         <S.BarPlayer>
@@ -13,6 +53,7 @@ export function Bar({ currentTrack, togglePlay, isPlaying, toggleLoop, isLooping
             isPlaying={isPlaying}
             toggleLoop={toggleLoop}
             isLooping={isLooping}
+            currentTrack={currentTrack}
           />
 
           <S.PlayerTrackPlay>

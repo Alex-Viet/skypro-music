@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTracks } from './api';
 import GlobalStyles from './App.styles';
@@ -42,37 +42,6 @@ export function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Audio-player
-  const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLooping, setIsLooping] = useState(false);
-
-  const handleStart = () => {
-    audioRef.current.play();
-    setIsPlaying(true);
-  };
-
-  const handleStop = () => {
-    audioRef.current.pause();
-    setIsPlaying(false);
-  };
-
-  const togglePlay = isPlaying ? handleStop : handleStart;
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      handleStart();
-    }
-  }, [currentTrack]);
-
-  const toggleLoop = () => {
-    if (audioRef.current) {
-      audioRef.current.loop = !isLooping;
-      setIsLooping(!isLooping);
-    }
-  };
-
   return (
     <>
       <GlobalStyles />
@@ -89,20 +58,7 @@ export function App() {
 
           {currentTrack ? (
             <S.Bar>
-              <audio
-                controls
-                src={currentTrack ? currentTrack.track_file : null}
-                ref={audioRef}
-              >
-                <track kind="captions" />
-              </audio>
-              <Bar
-                currentTrack={currentTrack}
-                togglePlay={togglePlay}
-                isPlaying={isPlaying}
-                toggleLoop={toggleLoop}
-                isLooping={isLooping}
-              />
+              <Bar currentTrack={currentTrack} />
             </S.Bar>
           ) : null}
           <footer />
