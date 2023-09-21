@@ -45,6 +45,7 @@ export function App() {
   // Audio-player
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
 
   const handleStart = () => {
     audioRef.current.play();
@@ -64,6 +65,13 @@ export function App() {
       handleStart();
     }
   }, [currentTrack]);
+
+  const toggleLoop = () => {
+    if (audioRef.current) {
+      audioRef.current.loop = !isLooping;
+      setIsLooping(!isLooping);
+    }
+  };
 
   return (
     <>
@@ -92,6 +100,8 @@ export function App() {
                 currentTrack={currentTrack}
                 togglePlay={togglePlay}
                 isPlaying={isPlaying}
+                toggleLoop={toggleLoop}
+                isLooping={isLooping}
               />
             </S.Bar>
           ) : null}

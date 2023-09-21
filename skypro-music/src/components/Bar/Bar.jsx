@@ -2,13 +2,18 @@ import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
 import { TrackPlay } from './TrackPlay';
 
-export function Bar({ currentTrack, togglePlay, isPlaying }) {
+export function Bar({ currentTrack, togglePlay, isPlaying, toggleLoop, isLooping }) {
   return (
     <S.BarContent>
       <S.BarPlayerProgress />
       <S.BarPlayerBlock>
         <S.BarPlayer>
-          <PlayerControls togglePlay={togglePlay} isPlaying={isPlaying} />
+          <PlayerControls
+            togglePlay={togglePlay}
+            isPlaying={isPlaying}
+            toggleLoop={toggleLoop}
+            isLooping={isLooping}
+          />
 
           <S.PlayerTrackPlay>
             <TrackPlay currentTrack={currentTrack} />

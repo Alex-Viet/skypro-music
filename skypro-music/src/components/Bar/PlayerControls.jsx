@@ -1,6 +1,6 @@
 import * as S from './PlayerControls.styles';
 
-export function PlayerControls({ togglePlay, isPlaying }) {
+export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping }) {
   return (
     <S.PlayerControls>
       <S.PlayerBtnPrev>
@@ -39,8 +39,8 @@ export function PlayerControls({ togglePlay, isPlaying }) {
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerBtnNextSvg>
       </S.PlayerBtnNext>
-      <S.PlayerBtnRepeat className="_btn-icon">
-        <S.PlayerBtnRepeatSvg alt="repeat">
+      <S.PlayerBtnRepeat className="_btn-icon" onClick={toggleLoop}>
+        <S.PlayerBtnRepeatSvg alt="repeat" $isLooping={isLooping}>
           <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
         </S.PlayerBtnRepeatSvg>
       </S.PlayerBtnRepeat>
