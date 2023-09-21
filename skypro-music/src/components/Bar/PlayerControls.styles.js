@@ -41,7 +41,22 @@ export const PlayerBtnPlay = styled.div`
 export const PlayerBtnPlaySvg = styled.svg`
   width: 22px;
   height: 20px;
-  fill: #d9d9d9;
+
+  svg {
+    fill: #d9d9d9;
+  }
+
+  &:hover svg {
+    fill: #696969;
+  }
+
+  rect {
+    fill: #d9d9d9;
+  }
+
+  &:hover rect {
+    fill: #696969;
+  }
 `;
 
 export const PlayerBtnNext = styled.div`
