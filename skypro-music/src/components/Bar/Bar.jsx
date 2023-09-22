@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
+import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
 
-export function Bar({ currentTrack }) {
+export const AudioPlayer = ({ currentTrack }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
 
-  // Audio-player
   const audioRef = useRef(null);
 
   const handleStart = () => {
@@ -25,7 +25,7 @@ export function Bar({ currentTrack }) {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-      // handleStart();        ВЕРНУТЬ ОБРАТНО!!!!!
+      handleStart();
     }
   }, [currentTrack]);
 
@@ -33,6 +33,35 @@ export function Bar({ currentTrack }) {
     if (audioRef.current) {
       audioRef.current.loop = !isLooping;
       setIsLooping(!isLooping);
+    }
+  };
+
+  const [currentTime, setCurrentTime] = useState(0);
+  let duration = 0;
+
+  if (audioRef.current) {
+    duration = audioRef.current.duration;
+  }
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.autoplay = true;
+      audioRef.current.addEventListener('timeupdate', () => {
+        setCurrentTime(audioRef.current.currentTime);
+        return () => {
+          audioRef.current.removeEventListener('timeupdate', () => {
+            setCurrentTime(audioRef.current.currentTime);
+          });
+        };
+      });
+    }
+  }, []);
+
+  const handleProgressBarChange = (event) => {
+    const newTime = parseFloat(event.target.value);
+    setCurrentTime(newTime);
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
     }
   };
 
@@ -45,7 +74,11 @@ export function Bar({ currentTrack }) {
       >
         <track kind="captions" />
       </audio>
-      <S.BarPlayerProgress />
+      <ProgressBar
+        currentTime={currentTime}
+        duration={duration}
+        handleProgressBarChange={handleProgressBarChange}
+      />
       <S.BarPlayerBlock>
         <S.BarPlayer>
           <PlayerControls
@@ -92,4 +125,4 @@ export function Bar({ currentTrack }) {
       </S.BarPlayerBlock>
     </S.BarContent>
   );
-}
+};

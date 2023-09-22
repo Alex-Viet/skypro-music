@@ -4,7 +4,7 @@ import { getTracks } from './api';
 import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
-import { Bar } from './components/Bar/Bar';
+import { AudioPlayer } from './components/Bar/Bar';
 
 export function App() {
   const [user, setUser] = useState(null);
@@ -58,7 +58,7 @@ export function App() {
 
           {currentTrack ? (
             <S.Bar>
-              <Bar currentTrack={currentTrack} />
+              <AudioPlayer currentTrack={currentTrack} />
             </S.Bar>
           ) : null}
           <footer />
