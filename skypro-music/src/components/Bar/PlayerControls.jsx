@@ -1,9 +1,13 @@
 import * as S from './PlayerControls.styles';
 
 export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping }) {
+  const handleNotRealized = () => {
+    alert('Еще не реализовано');
+  };
+
   return (
     <S.PlayerControls>
-      <S.PlayerBtnPrev>
+      <S.PlayerBtnPrev className="_btn" onClick={handleNotRealized}>
         <S.PlayerBtnPrevSvg alt="prev">
           <use xlinkHref="img/icon/sprite.svg#icon-prev" />
         </S.PlayerBtnPrevSvg>
@@ -34,7 +38,7 @@ export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping })
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext>
+      <S.PlayerBtnNext className="_btn" onClick={handleNotRealized}>
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerBtnNextSvg>
@@ -44,7 +48,7 @@ export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping })
           <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
         </S.PlayerBtnRepeatSvg>
       </S.PlayerBtnRepeat>
-      <S.PlayerBtnShuffle className="_btn-icon">
+      <S.PlayerBtnShuffle className="_btn-icon" onClick={handleNotRealized}>
         <S.PlayerBtnShuffleSvg alt="shuffle">
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
         </S.PlayerBtnShuffleSvg>
