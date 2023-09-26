@@ -21,6 +21,7 @@ export const ProgressInput = styled.input`
     height: var(--progress-height);
     background: var(--progress-bg-color);
   }
+
   &::-webkit-slider-thumb {
     --thumb-height: 1px;
     --thumb-width: 1px;
@@ -31,10 +32,6 @@ export const ProgressInput = styled.input`
       100vmax var(--progress-color);
   }
 
-  &::-webkit-slider-runnable-track {
-    background: var(--progress-bg-color);
-  }
-
   /* FF */
   &::-moz-range-track {
     width: 100%;
@@ -43,6 +40,7 @@ export const ProgressInput = styled.input`
     border: none;
     border-radius: 0px;
   }
+
   &::-moz-range-thumb {
     border: none;
     height: 25px;
@@ -50,6 +48,7 @@ export const ProgressInput = styled.input`
     border-radius: 50%;
     background: transparent;
   }
+
   &::-moz-range-progress {
     background-color: var(--progress-color);
     height: var(--progress-height);

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { formatSecondsToTime } from '../../utils/utils';
 import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
@@ -25,7 +26,7 @@ export const AudioPlayer = ({ currentTrack }) => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-      handleStart();
+      // handleStart();   ВЕРНУТЬ ОБРАТНО!!!!!
     }
   }, [currentTrack]);
 
@@ -71,9 +72,17 @@ export const AudioPlayer = ({ currentTrack }) => {
         controls
         src={currentTrack ? currentTrack.track_file : null}
         ref={audioRef}
+        style={{ display: 'none' }}
       >
         <track kind="captions" />
       </audio>
+      <S.BarPlayerTime>
+        {formatSecondsToTime(currentTime)}
+        {' '}
+        /
+        {' '}
+        {Number.isNaN(duration) ? '00:00' : formatSecondsToTime(duration)}
+      </S.BarPlayerTime>
       <ProgressBar
         currentTime={currentTime}
         duration={duration}

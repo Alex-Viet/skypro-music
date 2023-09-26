@@ -9,7 +9,7 @@ export const ProgressBar = ({ currentTime, duration, handleProgressBarChange }) 
       value={currentTime}
       step={0.01}
       onChange={handleProgressBarChange}
-      $color="#ff0000"
+      $color="#b672ff"
     />
   );
 };

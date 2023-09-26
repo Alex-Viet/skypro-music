@@ -16,6 +16,18 @@ export const BarPlayerProgress = styled.div`
   background: #2e2e2e;
 `;
 
+export const BarPlayerTime = styled.div`
+width: 100%;
+text-align: right;
+color: #696969;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px;
+letter-spacing: 0.016px;
+padding: 0 5px 10px 0;
+`;
+
 export const BarPlayerBlock = styled.div`
   height: 73px;
   display: -webkit-box;
