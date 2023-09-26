@@ -14,6 +14,7 @@ export function App() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [trackListError, setTrackListError] = useState(null);
 
+  // загрузка треков из апи
   useEffect(() => {
     async function handleGetTracks() {
       try {
@@ -29,6 +30,7 @@ export function App() {
     handleGetTracks();
   }, []);
 
+  // залогиниться и разлогиниться
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
   const handleLogout = () => {
     setUser(localStorage.clear());
@@ -36,6 +38,7 @@ export function App() {
     navigate('/login', { replace: true });
   };
 
+  // таймер скелетонов
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
 
@@ -48,6 +51,7 @@ export function App() {
 
   const audioRef = useRef(null);
 
+  // запуск/пауза
   const handleStart = () => {
     audioRef.current.play();
     setIsPlaying(true);
@@ -74,6 +78,7 @@ export function App() {
     }
   };
 
+  // прогресс трека
   const [currentTime, setCurrentTime] = useState(0);
   let duration = 0;
 
@@ -103,14 +108,16 @@ export function App() {
     }
   };
 
+  // звук
   const [volume, setVolume] = useState(0.5);
 
   const handleVolumeBarChange = (event) => {
     setVolume(event.target.value);
-    if (audioRef.current) {
-      audioRef.current.volume = parseFloat(volume);
-    }
   };
+
+  if (audioRef.current) {
+    audioRef.current.volume = parseFloat(volume);
+  }
 
   return (
     <>
