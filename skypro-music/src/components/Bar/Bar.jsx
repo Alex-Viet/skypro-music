@@ -3,6 +3,7 @@ import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
+import { VolumeBar } from './VolumeBar';
 
 export const AudioPlayer = ({ currentTrack,
   isPlaying,
@@ -12,7 +13,9 @@ export const AudioPlayer = ({ currentTrack,
   toggleLoop,
   currentTime,
   duration,
-  handleProgressBarChange }) => {
+  handleProgressBarChange,
+  volume,
+  handleVolumeBarChange }) => {
   return (
     <S.BarContent>
       <audio
@@ -35,6 +38,7 @@ export const AudioPlayer = ({ currentTrack,
         duration={duration}
         handleProgressBarChange={handleProgressBarChange}
       />
+
       <S.BarPlayerBlock>
         <S.BarPlayer>
           <PlayerControls
@@ -63,20 +67,8 @@ export const AudioPlayer = ({ currentTrack,
           </S.PlayerTrackPlay>
         </S.BarPlayer>
         <S.BarVolumeBlock>
-          <S.VolumeContent>
-            <S.VolumeImage>
-              <S.VolumeSvg>
-                <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-              </S.VolumeSvg>
-            </S.VolumeImage>
-            <S.VolumeProgress>
-              <S.VolumeProgressLine
-                className="_btn"
-                type="range"
-                name="range"
-              />
-            </S.VolumeProgress>
-          </S.VolumeContent>
+          <VolumeBar volume={volume} handleVolumeBarChange={handleVolumeBarChange} />
+
         </S.BarVolumeBlock>
       </S.BarPlayerBlock>
     </S.BarContent>

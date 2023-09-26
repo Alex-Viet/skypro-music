@@ -103,6 +103,15 @@ export function App() {
     }
   };
 
+  const [volume, setVolume] = useState(0.5);
+
+  const handleVolumeBarChange = (event) => {
+    setVolume(event.target.value);
+    if (audioRef.current) {
+      audioRef.current.volume = parseFloat(volume);
+    }
+  };
+
   return (
     <>
       <GlobalStyles />
@@ -129,6 +138,8 @@ export function App() {
                 currentTime={currentTime}
                 duration={duration}
                 handleProgressBarChange={handleProgressBarChange}
+                volume={volume}
+                handleVolumeBarChange={handleVolumeBarChange}
               />
             </S.Bar>
           ) : null}
