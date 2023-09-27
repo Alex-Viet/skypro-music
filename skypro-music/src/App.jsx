@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTracks } from './api';
 import GlobalStyles from './App.styles';
@@ -45,80 +45,6 @@ export function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Audio player
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLooping, setIsLooping] = useState(false);
-
-  const audioRef = useRef(null);
-
-  // запуск/пауза
-  const handleStart = () => {
-    audioRef.current.play();
-    setIsPlaying(true);
-  };
-
-  const handleStop = () => {
-    audioRef.current.pause();
-    setIsPlaying(false);
-  };
-
-  const togglePlay = isPlaying ? handleStop : handleStart;
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      handleStart();
-    }
-  }, [currentTrack]);
-
-  const toggleLoop = () => {
-    if (audioRef.current) {
-      audioRef.current.loop = !isLooping;
-      setIsLooping(!isLooping);
-    }
-  };
-
-  // прогресс трека
-  const [currentTime, setCurrentTime] = useState(0);
-  let duration = 0;
-
-  if (audioRef.current) {
-    duration = audioRef.current.duration;
-  }
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.autoplay = true;
-      audioRef.current.addEventListener('timeupdate', () => {
-        setCurrentTime(audioRef.current.currentTime);
-        return () => {
-          audioRef.current.removeEventListener('timeupdate', () => {
-            setCurrentTime(audioRef.current.currentTime);
-          });
-        };
-      });
-    }
-  });
-
-  const handleProgressBarChange = (event) => {
-    const newTime = parseFloat(event.target.value);
-    setCurrentTime(newTime);
-    if (audioRef.current) {
-      audioRef.current.currentTime = newTime;
-    }
-  };
-
-  // звук
-  const [volume, setVolume] = useState(0.5);
-
-  const handleVolumeBarChange = (event) => {
-    setVolume(event.target.value);
-  };
-
-  if (audioRef.current) {
-    audioRef.current.volume = parseFloat(volume);
-  }
-
   return (
     <>
       <GlobalStyles />
@@ -135,19 +61,7 @@ export function App() {
 
           {currentTrack ? (
             <S.Bar>
-              <AudioPlayer
-                currentTrack={currentTrack}
-                isPlaying={isPlaying}
-                isLooping={isLooping}
-                audioRef={audioRef}
-                togglePlay={togglePlay}
-                toggleLoop={toggleLoop}
-                currentTime={currentTime}
-                duration={duration}
-                handleProgressBarChange={handleProgressBarChange}
-                volume={volume}
-                handleVolumeBarChange={handleVolumeBarChange}
-              />
+              <AudioPlayer currentTrack={currentTrack} />
             </S.Bar>
           ) : null}
           <footer />
