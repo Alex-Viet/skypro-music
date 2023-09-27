@@ -85,7 +85,7 @@ export const AudioPlayer = ({ currentTrack }) => {
     <S.BarContent>
       <audio
         controls
-        src={currentTrack ? currentTrack.track_file : null}
+        src={currentTrack && currentTrack.track_file}
         ref={audioRef}
         style={{ display: 'none' }}
       >

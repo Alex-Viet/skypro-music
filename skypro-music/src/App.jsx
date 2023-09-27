@@ -59,11 +59,11 @@ export function App() {
             trackListError={trackListError}
           />
 
-          {currentTrack ? (
+          {currentTrack && (
             <S.Bar>
               <AudioPlayer currentTrack={currentTrack} />
             </S.Bar>
-          ) : null}
+          )}
           <footer />
         </S.Container>
       </S.Wrapper>
