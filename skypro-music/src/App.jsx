@@ -4,7 +4,7 @@ import { getTracks } from './api';
 import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
-import { Bar } from './components/Bar/Bar';
+import { AudioPlayer } from './components/Bar/Bar';
 
 export function App() {
   const [user, setUser] = useState(null);
@@ -14,6 +14,7 @@ export function App() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [trackListError, setTrackListError] = useState(null);
 
+  // загрузка треков из апи
   useEffect(() => {
     async function handleGetTracks() {
       try {
@@ -29,6 +30,7 @@ export function App() {
     handleGetTracks();
   }, []);
 
+  // залогиниться и разлогиниться
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
   const handleLogout = () => {
     setUser(localStorage.clear());
@@ -36,6 +38,7 @@ export function App() {
     navigate('/login', { replace: true });
   };
 
+  // таймер скелетонов
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
 
@@ -56,17 +59,11 @@ export function App() {
             trackListError={trackListError}
           />
 
-          {currentTrack ? (
+          {currentTrack && (
             <S.Bar>
-              <audio
-                controls
-                src={currentTrack ? currentTrack.track_file : null}
-              >
-                <track kind="captions" />
-              </audio>
-              <Bar currentTrack={currentTrack} />
+              <AudioPlayer currentTrack={currentTrack} />
             </S.Bar>
-          ) : null}
+          )}
           <footer />
         </S.Container>
       </S.Wrapper>

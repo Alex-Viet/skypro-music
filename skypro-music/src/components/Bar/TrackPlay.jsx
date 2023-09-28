@@ -11,12 +11,12 @@ export function TrackPlay({ currentTrack }) {
         </S.TrackPlayImage>
         <S.TrackPlayAuthor>
           <S.TrackPlayAuthorLink href="!#">
-            {currentTrack ? currentTrack.name : null}
+            {currentTrack && currentTrack.name}
           </S.TrackPlayAuthorLink>
         </S.TrackPlayAuthor>
         <S.TrackPlayAlbum>
           <S.TrackPlayAlbumLink href="!#">
-            {currentTrack ? currentTrack.author : null}
+            {currentTrack && currentTrack.author}
           </S.TrackPlayAlbumLink>
         </S.TrackPlayAlbum>
       </>

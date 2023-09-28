@@ -16,6 +16,18 @@ export const BarPlayerProgress = styled.div`
   background: #2e2e2e;
 `;
 
+export const BarPlayerTime = styled.div`
+  width: 100%;
+  text-align: right;
+  color: #696969;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.016px;
+  padding: 0 5px 10px 0;
+`;
+
 export const BarPlayerBlock = styled.div`
   height: 73px;
   display: -webkit-box;
@@ -107,40 +119,4 @@ export const TrackPlayDislikeSvg = styled.svg`
   height: 13px;
   fill: transparent;
   stroke: #696969;
-`;
-
-export const VolumeContent = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: end;
-`;
-
-export const VolumeImage = styled.div`
-  width: 13px;
-  height: 18px;
-  margin-right: 17px;
-`;
-
-export const VolumeSvg = styled.svg`
-  width: 13px;
-  height: 18px;
-  fill: transparent;
-`;
-
-export const VolumeProgress = styled.div`
-  width: 109px;
-`;
-
-export const VolumeProgressLine = styled.input`
-  width: 109px;
 `;
