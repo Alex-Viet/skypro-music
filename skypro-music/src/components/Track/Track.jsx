@@ -1,4 +1,4 @@
-import { formatTrackTime } from '../../utils/utils';
+import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
@@ -92,7 +92,7 @@ export function Track({ isLoading, tracks, setCurrentTrack, trackListError }) {
                   <use xlinkHref="img/icon/sprite.svg#icon-like" />
                 </S.TrackTimeSvg>
                 <S.TrackTimeText>
-                  {formatTrackTime(track.duration_in_seconds)}
+                  {formatSecondsToTime(track.duration_in_seconds)}
                 </S.TrackTimeText>
               </div>
             </S.PlaylistTrack>
