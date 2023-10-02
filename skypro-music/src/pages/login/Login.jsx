@@ -1,28 +1,49 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from './LoginAndRegister.styles';
+import { loginUser } from '../../api';
 
 export const Login = () => {
-  const [error, setError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const setUser = () => {
-  //   localStorage.setItem('user', 'token');
-  //   navigate('/', { replace: true });
-  // };
+  const setUser = (login, pass) => {
+    localStorage.setItem(login, pass);
+    navigate('/', { replace: true });
+  };
 
   const handleLogin = async () => {
-    alert(`Выполняется вход: ${email} ${password}`);
-    setError('Неизвестная ошибка входа');
+    try {
+      if (!email) {
+        setLoginError('Введите email');
+        return;
+      }
+
+      if (!password) {
+        setLoginError('Введите пароль');
+        return;
+      }
+
+      setIsLoginLoading(true);
+
+      await loginUser({ email, password }).then(() => {
+        setUser(email, password);
+      });
+    } catch (error) {
+      setLoginError(error.message);
+    } finally {
+      setIsLoginLoading(false);
+    }
   };
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
-    setError(null);
+    setLoginError(null);
   }, [email, password]);
 
   return (
@@ -53,11 +74,11 @@ export const Login = () => {
             }}
           />
         </S.Inputs>
-        {error && <S.Error>{error}</S.Error>}
+        {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
-            Войти
-          </S.PrimaryButton>
+          {!isLoginLoading && (
+            <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+          )}
           <Link to="/register">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
           </Link>

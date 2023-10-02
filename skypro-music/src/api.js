@@ -35,3 +35,27 @@ export async function registerUser({ email, password }) {
 
   return data;
 }
+
+export async function loginUser({ email, password }) {
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/login/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: { 'content-type': 'application/json' },
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = data.detail;
+
+    throw new Error(error);
+  }
+
+  return data;
+}
