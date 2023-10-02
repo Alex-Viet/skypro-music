@@ -1,22 +1,55 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from '../login/LoginAndRegister.styles';
+import { registerUser } from '../../api';
 
 export function Register() {
-  const [error, setError] = useState(null);
+  const [regError, setRegError] = useState(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [isRegLoading, setIsRegLoading] = useState(false);
 
-  const handleRegister = async () => {
-    alert(`Выполняется регистрация: ${email} ${password}`);
-    setError('Неизвестная ошибка регистрации');
+  const handleRegister = async (evt) => {
+    evt.preventDefault();
+
+    try {
+      if (!email) {
+        setRegError('Введите email');
+        return;
+      }
+
+      if (!password) {
+        setRegError('Введите пароль');
+        return;
+      }
+
+      if (!repeatPassword) {
+        setRegError('Подтвердите пароль');
+        return;
+      }
+
+      if (password !== repeatPassword) {
+        setRegError('Пароли не совпадают');
+        return;
+      }
+
+      setIsRegLoading(true);
+
+      await registerUser({ email, password }).then((data) => {
+        console.log(data);
+      });
+    } catch (error) {
+      setRegError(`Ошибка: ${error.message}`);
+    } finally {
+      setIsRegLoading(false);
+    }
   };
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
-    setError(null);
+    setRegError(null);
   }, [email, password, repeatPassword]);
 
   return (
@@ -56,11 +89,13 @@ export function Register() {
             }}
           />
         </S.Inputs>
-        {error && <S.Error>{error}</S.Error>}
+        {regError && <S.Error>{regError}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={handleRegister}>
-            Зарегистрироваться
-          </S.PrimaryButton>
+          {!isRegLoading && (
+            <S.PrimaryButton onClick={handleRegister}>
+              Зарегистрироваться
+            </S.PrimaryButton>
+          )}
           <Link to="/login" style={{ textAlign: 'center' }}>
             К авторизации
           </Link>
