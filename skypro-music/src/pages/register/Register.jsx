@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from '../login/LoginAndRegister.styles';
 import { registerUser } from '../../api';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function Register() {
   const [regError, setRegError] = useState(null);
@@ -10,6 +11,8 @@ export function Register() {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [isRegLoading, setIsRegLoading] = useState(false);
+
+  const { login } = useAuth();
 
   const handleRegister = async (evt) => {
     evt.preventDefault();
@@ -37,8 +40,8 @@ export function Register() {
 
       setIsRegLoading(true);
 
-      await registerUser({ email, password }).then((data) => {
-        console.log(data);
+      await registerUser({ email, password }).then(() => {
+        login(email);
       });
     } catch (error) {
       setRegError(`Ошибка: ${error.message}`);

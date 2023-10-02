@@ -52,7 +52,7 @@ export async function loginUser({ email, password }) {
   const data = await response.json();
 
   if (!response.ok) {
-    const error = data.detail;
+    const error = data.detail ?? data.email ?? data.password;
 
     throw new Error(error);
   }

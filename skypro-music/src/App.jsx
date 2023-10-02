@@ -5,6 +5,7 @@ import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
 import { AudioPlayer } from './components/Bar/Bar';
+import { AuthProvider } from './contexts/AuthContext';
 
 export function App() {
   const [user, setUser] = useState(null);
@@ -48,25 +49,27 @@ export function App() {
   return (
     <>
       <GlobalStyles />
-      <S.Wrapper>
-        <S.Container>
-          <AppRoutes
-            user={user}
-            onAuthButtonClick={user ? handleLogout : handleLogin}
-            tracks={tracks}
-            isLoading={isLoading}
-            setCurrentTrack={setCurrentTrack}
-            trackListError={trackListError}
-          />
+      <AuthProvider>
+        <S.Wrapper>
+          <S.Container>
+            <AppRoutes
+              user={user}
+              onAuthButtonClick={user ? handleLogout : handleLogin}
+              tracks={tracks}
+              isLoading={isLoading}
+              setCurrentTrack={setCurrentTrack}
+              trackListError={trackListError}
+            />
 
-          {currentTrack && (
-            <S.Bar>
-              <AudioPlayer currentTrack={currentTrack} />
-            </S.Bar>
-          )}
-          <footer />
-        </S.Container>
-      </S.Wrapper>
+            {currentTrack && (
+              <S.Bar>
+                <AudioPlayer currentTrack={currentTrack} />
+              </S.Bar>
+            )}
+            <footer />
+          </S.Container>
+        </S.Wrapper>
+      </AuthProvider>
     </>
   );
 }

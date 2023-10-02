@@ -1,7 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from './LoginAndRegister.styles';
 import { loginUser } from '../../api';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const Login = () => {
   const [loginError, setLoginError] = useState(null);
@@ -10,14 +11,11 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoginLoading, setIsLoginLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const setUser = (login, pass) => {
-    localStorage.setItem(login, pass);
-    navigate('/', { replace: true });
-  };
+  const handleLogin = async (evt) => {
+    evt.preventDefault();
 
-  const handleLogin = async () => {
     try {
       if (!email) {
         setLoginError('Введите email');
@@ -32,7 +30,7 @@ export const Login = () => {
       setIsLoginLoading(true);
 
       await loginUser({ email, password }).then(() => {
-        setUser(email, password);
+        login(email);
       });
     } catch (error) {
       setLoginError(error.message);
