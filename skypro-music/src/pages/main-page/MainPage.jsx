@@ -13,7 +13,7 @@ export function MainPage({ tracks, isLoading, setCurrentTrack, trackListError })
         setCurrentTrack={setCurrentTrack}
         trackListError={trackListError}
       />
-      <Sidebar isLoading={isLoading} />
+      <Sidebar isLoading={isLoading} setCurrentTrack={setCurrentTrack} />
     </S.Main>
   );
 }

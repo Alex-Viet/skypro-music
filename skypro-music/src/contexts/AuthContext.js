@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     localStorage.clear();
+    navigate('/login', { replace: true });
   };
 
   const userContext = useMemo(

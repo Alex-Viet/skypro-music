@@ -52,7 +52,9 @@ export const AudioPlayer = ({ currentTrack }) => {
     if (audioRef.current) {
       audioRef.current.autoplay = true;
       audioRef.current.addEventListener('timeupdate', () => {
-        setCurrentTime(audioRef.current.currentTime);
+        if (audioRef.current) {
+          setCurrentTime(audioRef.current.currentTime);
+        }
         return () => {
           audioRef.current.removeEventListener('timeupdate', () => {
             setCurrentTime(audioRef.current.currentTime);
@@ -60,7 +62,7 @@ export const AudioPlayer = ({ currentTrack }) => {
         };
       });
     }
-  });
+  }, []);
 
   const handleProgressBarChange = (event) => {
     const newTime = parseFloat(event.target.value);
