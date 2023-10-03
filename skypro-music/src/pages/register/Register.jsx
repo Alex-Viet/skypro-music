@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from '../login/LoginAndRegister.styles';
-import { registerUser } from '../../api';
+import { getToken, registerUser } from '../../api';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function Register() {
   const [regError, setRegError] = useState(null);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -41,7 +40,9 @@ export function Register() {
       setIsRegLoading(true);
 
       await registerUser({ email, password }).then(() => {
-        login(email);
+        getToken({ email, password }).then((data) => {
+          login(email, data.access);
+        });
       });
     } catch (error) {
       setRegError(`Ошибка: ${error.message}`);

@@ -11,9 +11,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const login = (userData) => {
+  const login = (userData, token) => {
     setUser(userData);
-    localStorage.setItem('user', userData);
+    localStorage.setItem('user', token);
     navigate('/', { replace: true });
   };
 

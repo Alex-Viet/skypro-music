@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from './LoginAndRegister.styles';
-import { loginUser } from '../../api';
+import { loginUser, getToken } from '../../api';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const Login = () => {
   const [loginError, setLoginError] = useState(null);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginLoading, setIsLoginLoading] = useState(false);
@@ -30,7 +29,9 @@ export const Login = () => {
       setIsLoginLoading(true);
 
       await loginUser({ email, password }).then(() => {
-        login(email);
+        getToken({ email, password }).then((data) => {
+          login(email, data.access);
+        });
       });
     } catch (error) {
       setLoginError(error.message);
