@@ -1,16 +1,13 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import * as S from './MainNav.styles';
 
 export function NavMenu({ setCurrentTrack }) {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const { user, login, logout } = useAuth();
 
-  const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
+  const handleLogin = () => login();
   const handleLogout = () => {
-    setUser(localStorage.clear());
+    logout();
     setCurrentTrack(null);
-    navigate('/login', { replace: true });
   };
 
   return (
