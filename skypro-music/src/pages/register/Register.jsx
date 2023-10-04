@@ -39,9 +39,9 @@ export function Register() {
 
       setIsRegLoading(true);
 
-      await registerUser({ email, password }).then(() => {
-        getToken({ email, password }).then((data) => {
-          login(email, data.access);
+      await registerUser({ email, password }).then((loginData) => {
+        getToken({ email, password }).then((tokenData) => {
+          login(loginData, tokenData.access);
         });
       });
     } catch (error) {

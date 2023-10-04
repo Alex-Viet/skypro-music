@@ -28,9 +28,9 @@ export const Login = () => {
 
       setIsLoginLoading(true);
 
-      await loginUser({ email, password }).then(() => {
-        getToken({ email, password }).then((data) => {
-          login(email, data.access);
+      await loginUser({ email, password }).then((loginData) => {
+        getToken({ email, password }).then((tokenData) => {
+          login(loginData, tokenData.access);
         });
       });
     } catch (error) {
@@ -76,7 +76,7 @@ export const Login = () => {
         {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
           {!isLoginLoading && (
-            <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+          <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
           )}
           <Link to="/register">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
