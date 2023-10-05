@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { getTracks } from './api';
 import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
 import { AudioPlayer } from './components/Bar/Bar';
 import { AuthProvider } from './contexts/AuthContext';
+import { addTracks } from './store/slices/playlistSlice';
 
 export function App() {
   const [user, setUser] = useState(null);
@@ -15,12 +17,15 @@ export function App() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [trackListError, setTrackListError] = useState(null);
 
+  const dispatch = useDispatch();
+
   // загрузка треков из апи
   useEffect(() => {
     async function handleGetTracks() {
       try {
         setTrackListError(null);
         await getTracks().then((data) => {
+          dispatch(addTracks(data));
           setTracks(data);
         });
       } catch (error) {
@@ -29,7 +34,7 @@ export function App() {
     }
 
     handleGetTracks();
-  }, []);
+  }, [dispatch]);
 
   // залогиниться и разлогиниться
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
