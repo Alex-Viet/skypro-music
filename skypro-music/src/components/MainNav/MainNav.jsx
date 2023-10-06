@@ -4,7 +4,7 @@ import { NavBurger } from './NavBurger';
 import { NavLogo } from './NavLogo';
 import { NavMenu } from './NavMenu';
 
-export function MainNav({ setCurrentTrack }) {
+export function MainNav() {
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => {
@@ -15,7 +15,7 @@ export function MainNav({ setCurrentTrack }) {
     <S.MainNav>
       <NavLogo />
       <NavBurger toggleVisibility={toggleVisibility} />
-      {isVisible && <NavMenu setCurrentTrack={setCurrentTrack} />}
+      {isVisible && <NavMenu />}
     </S.MainNav>
   );
 }

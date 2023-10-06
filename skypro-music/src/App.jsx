@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTracks } from './api';
 import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
 import { AudioPlayer } from './components/Bar/Bar';
 import { AuthProvider } from './contexts/AuthContext';
-import { addTracks } from './store/slices/playlistSlice';
+import { addTracks, setCurrentTrack } from './store/slices/playlistSlice';
 
 export function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTrack, setCurrentTrack] = useState(null);
   const [trackListError, setTrackListError] = useState(null);
 
   const dispatch = useDispatch();
+
+  const currentTrack = useSelector((state) => state.playlist.currentTrack);
 
   // загрузка треков из апи
   useEffect(() => {
@@ -38,7 +39,7 @@ export function App() {
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'));
   const handleLogout = () => {
     setUser(localStorage.clear());
-    setCurrentTrack(null);
+    dispatch(setCurrentTrack(null));
     navigate('/login', { replace: true });
   };
 
@@ -59,13 +60,12 @@ export function App() {
               user={user}
               onAuthButtonClick={user ? handleLogout : handleLogin}
               isLoading={isLoading}
-              setCurrentTrack={setCurrentTrack}
               trackListError={trackListError}
             />
 
             {currentTrack && (
               <S.Bar>
-                <AudioPlayer currentTrack={currentTrack} />
+                <AudioPlayer />
               </S.Bar>
             )}
             <footer />

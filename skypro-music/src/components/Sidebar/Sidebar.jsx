@@ -1,14 +1,17 @@
+import { useDispatch } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext';
 import { PLAYLISTS } from '../../playlists';
+import { setCurrentTrack } from '../../store/slices/playlistSlice';
 import { Playlist } from '../Playlist/Playlist';
 import * as S from './Sidebar.styles';
 
-export function Sidebar({ isLoading, setCurrentTrack }) {
+export function Sidebar({ isLoading }) {
   const { user, logout } = useAuth();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     logout();
-    setCurrentTrack(null);
+    dispatch(setCurrentTrack(null));
   };
 
   return (

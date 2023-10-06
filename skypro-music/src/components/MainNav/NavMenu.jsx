@@ -1,13 +1,16 @@
+import { useDispatch } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext';
+import { setCurrentTrack } from '../../store/slices/playlistSlice';
 import * as S from './MainNav.styles';
 
-export function NavMenu({ setCurrentTrack }) {
+export function NavMenu() {
   const { user, login, logout } = useAuth();
+  const dispatch = useDispatch();
 
   const handleLogin = () => login();
   const handleLogout = () => {
     logout();
-    setCurrentTrack(null);
+    dispatch(setCurrentTrack(null));
   };
 
   return (

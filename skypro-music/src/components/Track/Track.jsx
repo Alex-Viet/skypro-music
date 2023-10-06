@@ -1,9 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentTrack } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
-export function Track({ isLoading, setCurrentTrack, trackListError }) {
+export function Track({ isLoading, trackListError }) {
+  const dispatch = useDispatch();
+
   const tracksData = useSelector((state) => state.playlist.tracks);
   const tracks = tracksData[0]?.tracks || [];
 
@@ -79,7 +82,9 @@ export function Track({ isLoading, setCurrentTrack, trackListError }) {
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>
                 <div>
-                  <S.TrackTitleLink onClick={() => setCurrentTrack(track)}>
+                  <S.TrackTitleLink
+                    onClick={() => dispatch(setCurrentTrack(track))}
+                  >
                     {track.name}
                     <S.TrackTitleSpan />
                   </S.TrackTitleLink>

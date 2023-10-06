@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
 import * as S from './Bar.styles';
 import { PlayerControls } from './PlayerControls';
@@ -6,9 +7,11 @@ import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
 import { VolumeBar } from './VolumeBar';
 
-export const AudioPlayer = ({ currentTrack }) => {
+export const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
+
+  const currentTrack = useSelector((state) => state.playlist.currentTrack);
 
   const audioRef = useRef(null);
 
@@ -113,7 +116,6 @@ export const AudioPlayer = ({ currentTrack }) => {
             isPlaying={isPlaying}
             toggleLoop={toggleLoop}
             isLooping={isLooping}
-            currentTrack={currentTrack}
           />
 
           <S.PlayerTrackPlay>
