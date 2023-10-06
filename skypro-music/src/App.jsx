@@ -11,7 +11,6 @@ import { addTracks } from './store/slices/playlistSlice';
 
 export function App() {
   const [user, setUser] = useState(null);
-  const [tracks, setTracks] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -26,7 +25,6 @@ export function App() {
         setTrackListError(null);
         await getTracks().then((data) => {
           dispatch(addTracks(data));
-          setTracks(data);
         });
       } catch (error) {
         setTrackListError(error.message);
@@ -60,7 +58,6 @@ export function App() {
             <AppRoutes
               user={user}
               onAuthButtonClick={user ? handleLogout : handleLogin}
-              tracks={tracks}
               isLoading={isLoading}
               setCurrentTrack={setCurrentTrack}
               trackListError={trackListError}

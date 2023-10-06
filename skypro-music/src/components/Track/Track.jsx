@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Track.styles';
 
-export function Track({ isLoading, tracks, setCurrentTrack, trackListError }) {
+export function Track({ isLoading, setCurrentTrack, trackListError }) {
+  const tracksData = useSelector((state) => state.playlist.tracks);
+  const tracks = tracksData[0]?.tracks || [];
+
   return (
     <S.PlaylistItem>
       {isLoading ? (

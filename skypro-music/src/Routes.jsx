@@ -8,7 +8,6 @@ import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 export function AppRoutes({ user,
-  tracks,
   isLoading,
   setCurrentTrack,
   trackListError }) {
@@ -23,7 +22,6 @@ export function AppRoutes({ user,
         element={(
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
             <MainPage
-              tracks={tracks}
               isLoading={isLoading}
               setCurrentTrack={setCurrentTrack}
               trackListError={trackListError}
