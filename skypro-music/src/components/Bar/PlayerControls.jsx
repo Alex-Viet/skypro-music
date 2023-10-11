@@ -1,8 +1,22 @@
+import { useDispatch } from 'react-redux';
+import { playNextTrack } from '../../store/slices/playlistSlice';
 import * as S from './PlayerControls.styles';
 
-export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping }) {
+export function PlayerControls({
+  togglePlay,
+  isPlaying,
+  toggleLoop,
+  isLooping,
+  currentTrack,
+}) {
+  const dispatch = useDispatch();
+
   const handleNotRealized = () => {
     alert('Еще не реализовано');
+  };
+
+  const handleNextTrack = () => {
+    dispatch(playNextTrack(currentTrack.id));
   };
 
   return (
@@ -38,7 +52,10 @@ export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping })
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext className="_btn" onClick={handleNotRealized}>
+      <S.PlayerBtnNext
+        className="_btn"
+        onClick={handleNextTrack}
+      >
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerBtnNextSvg>

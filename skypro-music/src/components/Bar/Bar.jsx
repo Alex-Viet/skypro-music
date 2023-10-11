@@ -116,6 +116,7 @@ export const AudioPlayer = () => {
             isPlaying={isPlaying}
             toggleLoop={toggleLoop}
             isLooping={isLooping}
+            currentTrack={currentTrack}
           />
 
           <S.PlayerTrackPlay>
