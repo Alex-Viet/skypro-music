@@ -6,8 +6,11 @@ import { Favorites } from './pages/favorites/Favorites';
 import { MainPage } from './pages/main-page/MainPage';
 import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { useAuth } from './contexts/AuthContext';
 
-export function AppRoutes({ user, isLoading, trackListError }) {
+export function AppRoutes({ isLoading, trackListError }) {
+  const { user } = useAuth();
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
