@@ -5,24 +5,24 @@ const playlistSlice = createSlice({
   initialState: {
     tracks: [],
     currentTrack: null,
-    currentTrackId: 0,
     // isShuffleModeOn: false,
   },
   reducers: {
     addTracks(state, action) {
-      state.tracks.push({
-        tracks: action.payload,
-      });
+      state.tracks = action.payload;
     },
     setCurrentTrack(state, action) {
       state.currentTrack = action.payload;
-      console.log(action.payload.id);
     },
-    playNextTrack(state, action) {
-      // if (state.currentTrack.id < state.tracks.length - 1) {
-      state.currentTrackId = action.payload + 1;
-      console.log(state.currentTrackId);
-      // }
+    playNextTrack(state) {
+      if (!state.currentTrack || state.tracks.length === 0) return;
+
+      const currentIndex = state.tracks.findIndex(
+        (track) => track.id === state.currentTrack.id,
+      );
+
+      const nextIndex = (currentIndex + 1) % state.tracks.length;
+      state.currentTrack = state.tracks[nextIndex];
     },
     // prevTrack() {},
     // toggleShuffleMode(state) {

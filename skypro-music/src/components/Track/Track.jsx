@@ -7,8 +7,7 @@ import * as S from './Track.styles';
 export function Track({ isLoading, trackListError }) {
   const dispatch = useDispatch();
 
-  const tracksData = useSelector((state) => state.playlist.tracks);
-  const tracks = tracksData[0]?.tracks || [];
+  const tracks = useSelector((state) => state.playlist.tracks);
 
   return (
     <S.PlaylistItem>
