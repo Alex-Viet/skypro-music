@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { playNextTrack } from '../../store/slices/playlistSlice';
+import { playNextTrack, playPrevTrack } from '../../store/slices/playlistSlice';
 import * as S from './PlayerControls.styles';
 
 export function PlayerControls({
@@ -8,6 +8,8 @@ export function PlayerControls({
   toggleLoop,
   isLooping,
   currentTrack,
+  currentTime,
+  setCurrentTime,
 }) {
   const dispatch = useDispatch();
 
@@ -19,9 +21,18 @@ export function PlayerControls({
     dispatch(playNextTrack(currentTrack.id));
   };
 
+  // НЕ ПОЛУЧАЕТСЯ ПЕРЕМОТАТЬ ТРЕК НА НАЧАЛО ПОСЛЕ 5 СЕК!!!
+  const handlePreviousTrack = () => {
+    if (currentTime > 5) {
+      setCurrentTime(0);
+    } else {
+      dispatch(playPrevTrack(currentTrack.id));
+    }
+  };
+
   return (
     <S.PlayerControls>
-      <S.PlayerBtnPrev className="_btn" onClick={handleNotRealized}>
+      <S.PlayerBtnPrev className="_btn" onClick={handlePreviousTrack}>
         <S.PlayerBtnPrevSvg alt="prev">
           <use xlinkHref="img/icon/sprite.svg#icon-prev" />
         </S.PlayerBtnPrevSvg>
@@ -52,10 +63,7 @@ export function PlayerControls({
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext
-        className="_btn"
-        onClick={handleNextTrack}
-      >
+      <S.PlayerBtnNext className="_btn" onClick={handleNextTrack}>
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerBtnNextSvg>

@@ -24,12 +24,25 @@ const playlistSlice = createSlice({
       const nextIndex = (currentIndex + 1) % state.tracks.length;
       state.currentTrack = state.tracks[nextIndex];
     },
-    // prevTrack() {},
+    playPrevTrack(state) {
+      if (!state.currentTrack || state.tracks.length === 0) return;
+
+      let currentIndex = state.tracks.findIndex(
+        (track) => track.id === state.currentTrack.id,
+      );
+
+      if (currentIndex === 0) {
+        const firstTrackIndex = 0;
+        state.currentTrack = state.tracks[firstTrackIndex];
+      } else {
+        state.currentTrack = state.tracks[(currentIndex -= 1)];
+      }
+    },
     // toggleShuffleMode(state) {
     //   state.isShuffleModeOn = !state.isShuffleModeOn;
     // },
   },
 });
 
-export const { addTracks, setCurrentTrack, playNextTrack } = playlistSlice.actions;
+export const { addTracks, setCurrentTrack, playNextTrack, playPrevTrack } = playlistSlice.actions;
 export default playlistSlice.reducer;
