@@ -9,7 +9,7 @@ export function PlayerControls({
   isLooping,
   currentTrack,
   currentTime,
-  setCurrentTime,
+  rewindTrack,
 }) {
   const dispatch = useDispatch();
 
@@ -21,10 +21,9 @@ export function PlayerControls({
     dispatch(playNextTrack(currentTrack.id));
   };
 
-  // НЕ ПОЛУЧАЕТСЯ ПЕРЕМОТАТЬ ТРЕК НА НАЧАЛО ПОСЛЕ 5 СЕК!!!
   const handlePreviousTrack = () => {
     if (currentTime > 5) {
-      setCurrentTime(0);
+      rewindTrack(0);
     } else {
       dispatch(playPrevTrack(currentTrack.id));
     }

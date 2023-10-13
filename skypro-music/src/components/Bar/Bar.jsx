@@ -75,6 +75,12 @@ export const AudioPlayer = () => {
     }
   };
 
+  // функция перемотки трека
+  const rewindTrack = (value) => {
+    setCurrentTime(value);
+    audioRef.current.currentTime = value;
+  };
+
   // регулятор громкости
   const [volume, setVolume] = useState(0.5);
 
@@ -118,7 +124,7 @@ export const AudioPlayer = () => {
             isLooping={isLooping}
             currentTrack={currentTrack}
             currentTime={currentTime}
-            setCurrentTime={setCurrentTime}
+            rewindTrack={rewindTrack}
           />
 
           <S.PlayerTrackPlay>
