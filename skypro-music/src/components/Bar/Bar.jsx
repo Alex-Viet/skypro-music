@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
-import * as S from './Bar.styles';
+import { playNextTrack } from '../../store/slices/playlistSlice';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
 import { VolumeBar } from './VolumeBar';
+import * as S from './Bar.styles';
 
 export const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,6 +15,7 @@ export const AudioPlayer = () => {
   const currentTrack = useSelector((state) => state.playlist.currentTrack);
 
   const audioRef = useRef(null);
+  const dispatch = useDispatch();
 
   // запуск/пауза
   const handleStart = () => {
@@ -54,18 +56,25 @@ export const AudioPlayer = () => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.autoplay = true;
-      audioRef.current.addEventListener('timeupdate', () => {
+
+      const updateTime = () => {
         if (audioRef.current) {
           setCurrentTime(audioRef.current.currentTime);
         }
-        return () => {
-          audioRef.current.removeEventListener('timeupdate', () => {
-            setCurrentTime(audioRef.current.currentTime);
-          });
-        };
+      };
+
+      audioRef.current.addEventListener('timeupdate', updateTime);
+
+      audioRef.current.addEventListener('ended', () => {
+        dispatch(playNextTrack(currentTrack.id));
       });
+
+      return () => {
+        audioRef.current.removeEventListener('timeupdate', updateTime);
+      };
     }
-  }, []);
+    return null;
+  }, [currentTrack]);
 
   const handleProgressBarChange = (event) => {
     const newTime = parseFloat(event.target.value);
@@ -77,8 +86,10 @@ export const AudioPlayer = () => {
 
   // функция перемотки трека
   const rewindTrack = (value) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
+    }
     setCurrentTime(value);
-    audioRef.current.currentTime = value;
   };
 
   // регулятор громкости
