@@ -8,6 +8,8 @@ export function Track({ isLoading, trackListError }) {
   const dispatch = useDispatch();
 
   const tracks = useSelector((state) => state.playlist.tracks);
+  const isPlaying = useSelector((state) => state.playlist.isPlaying);
+  const currentTrack = useSelector((state) => state.playlist.currentTrack);
 
   return (
     <S.PlaylistItem>
@@ -76,9 +78,19 @@ export function Track({ isLoading, trackListError }) {
             <S.PlaylistTrack key={track.id}>
               <S.TrackTitle>
                 <S.TrackTitleImage>
-                  <S.TrackTitleSvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
-                  </S.TrackTitleSvg>
+                  {currentTrack?.id !== track.id ? (
+                    <S.TrackTitleSvg alt="music">
+                      <use
+                        xlinkHref={
+                          isLoading ? '' : 'img/icon/sprite.svg#icon-note'
+                        }
+                      />
+                    </S.TrackTitleSvg>
+                  ) : (
+                    <S.TrackTitleSvgActive alt="music" $isPlaying={isPlaying}>
+                      <use xlinkHref="img/icon/sprite.svg#icon-dot" />
+                    </S.TrackTitleSvgActive>
+                  )}
                 </S.TrackTitleImage>
                 <div>
                   <S.TrackTitleLink
