@@ -66,10 +66,6 @@ export const AudioPlayer = () => {
 
       audioRef.current.addEventListener('timeupdate', updateTime);
 
-      audioRef.current.addEventListener('ended', () => {
-        dispatch(playNextTrack(currentTrack.id));
-      });
-
       return () => {
         audioRef.current.removeEventListener('timeupdate', updateTime);
       };
@@ -111,6 +107,7 @@ export const AudioPlayer = () => {
         src={currentTrack && currentTrack.track_file}
         ref={audioRef}
         style={{ display: 'none' }}
+        onEnded={() => dispatch(playNextTrack())}
       >
         <track kind="captions" />
       </audio>
