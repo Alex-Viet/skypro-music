@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
-import { playNextTrack } from '../../store/slices/playlistSlice';
+import { playTrack, stopTrack, playNextTrack } from '../../store/slices/playlistSlice';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
@@ -9,7 +9,6 @@ import { VolumeBar } from './VolumeBar';
 import * as S from './Bar.styles';
 
 export const AudioPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
 
   const currentTrack = useSelector((state) => state.playlist.currentTrack);
@@ -18,14 +17,16 @@ export const AudioPlayer = () => {
   const dispatch = useDispatch();
 
   // запуск/пауза
+  const isPlaying = useSelector((state) => state.playlist.isPlaying);
+
   const handleStart = () => {
     audioRef.current.play();
-    setIsPlaying(true);
+    dispatch(playTrack(true));
   };
 
   const handleStop = () => {
     audioRef.current.pause();
-    setIsPlaying(false);
+    dispatch(stopTrack(false));
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;
