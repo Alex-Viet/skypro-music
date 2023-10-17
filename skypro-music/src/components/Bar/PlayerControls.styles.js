@@ -101,5 +101,5 @@ export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: ${(props) => (props.$isShuffle ? '#FFFFFF' : '#696969')};
 `;

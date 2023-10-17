@@ -1,5 +1,11 @@
-import { useDispatch } from 'react-redux';
-import { playNextTrack, playPrevTrack } from '../../store/slices/playlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  playNextTrack,
+  playPrevTrack,
+  toggleShuffleMode,
+  shuffleTracks,
+} from '../../store/slices/playlistSlice';
+import { shuffleArray } from '../../utils/utils';
 import * as S from './PlayerControls.styles';
 
 export function PlayerControls({
@@ -13,10 +19,7 @@ export function PlayerControls({
 }) {
   const dispatch = useDispatch();
 
-  const handleNotRealized = () => {
-    alert('Еще не реализовано');
-  };
-
+  // Переключение трека на следующий и предыдущий
   const handleNextTrack = () => {
     dispatch(playNextTrack(currentTrack.id));
   };
@@ -26,6 +29,20 @@ export function PlayerControls({
       rewindTrack(0);
     } else {
       dispatch(playPrevTrack(currentTrack.id));
+    }
+  };
+
+  // Перемешивание треков
+  const isShuffle = useSelector((state) => state.playlist.isShuffleModeOn);
+  const tracks = useSelector((state) => state.playlist.tracks);
+
+  const handleShuffleMode = () => {
+    const newShuffleMode = !isShuffle;
+    dispatch(toggleShuffleMode(newShuffleMode));
+    if (newShuffleMode) {
+      dispatch(shuffleTracks(shuffleArray([...tracks])));
+    } else {
+      dispatch(shuffleTracks([...tracks]));
     }
   };
 
@@ -72,8 +89,8 @@ export function PlayerControls({
           <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
         </S.PlayerBtnRepeatSvg>
       </S.PlayerBtnRepeat>
-      <S.PlayerBtnShuffle className="_btn-icon" onClick={handleNotRealized}>
-        <S.PlayerBtnShuffleSvg alt="shuffle">
+      <S.PlayerBtnShuffle className="_btn-icon" onClick={handleShuffleMode}>
+        <S.PlayerBtnShuffleSvg alt="shuffle" $isShuffle={isShuffle}>
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
         </S.PlayerBtnShuffleSvg>
       </S.PlayerBtnShuffle>
