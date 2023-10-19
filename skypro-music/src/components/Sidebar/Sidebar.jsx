@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext';
 import { PLAYLISTS } from '../../playlists';
 import { setCurrentTrack } from '../../store/slices/playlistSlice';
-import { Playlist } from '../Playlist/Playlist';
+import { Categories } from '../Categories/Categories';
 import * as S from './Sidebar.styles';
 
 export function Sidebar({ isLoading }) {
@@ -26,7 +26,8 @@ export function Sidebar({ isLoading }) {
       </S.SidebarPersonal>
       <S.SidebarBlock>
         <S.SidebarList>
-          <Playlist isLoading={isLoading} playlists={PLAYLISTS} />
+          <Categories isLoading={isLoading} playlists={PLAYLISTS} />
+
         </S.SidebarList>
       </S.SidebarBlock>
     </S.MainSidebar>

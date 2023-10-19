@@ -1,27 +1,31 @@
-import { PLAYLISTS } from '../../playlists';
-import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Playlist.styles';
+import { Filter } from '../Filter/Filter';
+import { Search } from '../Search/Search';
+import { Track } from '../Track/Track';
 
-export function Playlist({ isLoading }) {
+export function Playlist({ isLoading, trackListError }) {
   return (
-    <S.SidebarItem>
-      {PLAYLISTS.map((playlist) => {
-        if (isLoading) {
-          return (
-            <Skeleton
-              width="250px"
-              height="150px"
-              margin="0 0 30px 0"
-              key={playlist.id}
-            />
-          );
-        }
-        return (
-          <S.SidebarLink to={`/category/${playlist.id}`} key={playlist.id}>
-            <S.SidebarImage src={playlist.img} alt="day's playlist" />
-          </S.SidebarLink>
-        );
-      })}
-    </S.SidebarItem>
+    <S.MainPlaylist>
+      <Search />
+
+      <S.PlaylistTitle>Треки</S.PlaylistTitle>
+      <Filter />
+
+      <S.PlaylistContent>
+        <S.ContentTitle>
+          <S.ColTrackName>Трек</S.ColTrackName>
+          <S.ColAuthor>ИСПОЛНИТЕЛЬ</S.ColAuthor>
+          <S.ColAlbum>АЛЬБОМ</S.ColAlbum>
+          <S.ColTrackTime>
+            <S.PlaylistTitleSvg alt="time">
+              <use xlinkHref="img/icon/sprite.svg#icon-watch" />
+            </S.PlaylistTitleSvg>
+          </S.ColTrackTime>
+        </S.ContentTitle>
+        <S.ContentPlaylist>
+          <Track isLoading={isLoading} trackListError={trackListError} />
+        </S.ContentPlaylist>
+      </S.PlaylistContent>
+    </S.MainPlaylist>
   );
 }

@@ -7,7 +7,7 @@ import { MainPage } from './pages/main-page/MainPage';
 import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { useAuth } from './contexts/AuthContext';
-import { CenterBlock } from './components/CenterBlock/CenterBlock';
+import { Playlist } from './components/Playlist/Playlist';
 
 export function AppRoutes({ isLoading, trackListError }) {
   const { user } = useAuth();
@@ -29,7 +29,7 @@ export function AppRoutes({ isLoading, trackListError }) {
         <Route
           index
           element={(
-            <CenterBlock
+            <Playlist
               isLoading={isLoading}
               trackListError={trackListError}
             />
