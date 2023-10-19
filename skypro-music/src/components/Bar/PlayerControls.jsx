@@ -1,13 +1,54 @@
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  playNextTrack,
+  playPrevTrack,
+  toggleShuffleMode,
+  shuffleTracks,
+} from '../../store/slices/playlistSlice';
+import { shuffleArray } from '../../utils/utils';
 import * as S from './PlayerControls.styles';
 
-export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping }) {
-  const handleNotRealized = () => {
-    alert('Еще не реализовано');
+export function PlayerControls({
+  togglePlay,
+  isPlaying,
+  toggleLoop,
+  isLooping,
+  currentTrack,
+  currentTime,
+  rewindTrack,
+}) {
+  const dispatch = useDispatch();
+
+  // Переключение трека на следующий и предыдущий
+  const handleNextTrack = () => {
+    dispatch(playNextTrack(currentTrack.id));
+  };
+
+  const handlePreviousTrack = () => {
+    if (currentTime > 5) {
+      rewindTrack(0);
+    } else {
+      dispatch(playPrevTrack(currentTrack.id));
+    }
+  };
+
+  // Перемешивание треков
+  const isShuffle = useSelector((state) => state.playlist.isShuffleModeOn);
+  const tracks = useSelector((state) => state.playlist.tracks);
+
+  const handleShuffleMode = () => {
+    const newShuffleMode = !isShuffle;
+    dispatch(toggleShuffleMode(newShuffleMode));
+    if (newShuffleMode) {
+      dispatch(shuffleTracks(shuffleArray([...tracks])));
+    } else {
+      dispatch(shuffleTracks([...tracks]));
+    }
   };
 
   return (
     <S.PlayerControls>
-      <S.PlayerBtnPrev className="_btn" onClick={handleNotRealized}>
+      <S.PlayerBtnPrev className="_btn" onClick={handlePreviousTrack}>
         <S.PlayerBtnPrevSvg alt="prev">
           <use xlinkHref="img/icon/sprite.svg#icon-prev" />
         </S.PlayerBtnPrevSvg>
@@ -38,7 +79,7 @@ export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping })
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext className="_btn" onClick={handleNotRealized}>
+      <S.PlayerBtnNext className="_btn" onClick={handleNextTrack}>
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerBtnNextSvg>
@@ -48,8 +89,8 @@ export function PlayerControls({ togglePlay, isPlaying, toggleLoop, isLooping })
           <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
         </S.PlayerBtnRepeatSvg>
       </S.PlayerBtnRepeat>
-      <S.PlayerBtnShuffle className="_btn-icon" onClick={handleNotRealized}>
-        <S.PlayerBtnShuffleSvg alt="shuffle">
+      <S.PlayerBtnShuffle className="_btn-icon" onClick={handleShuffleMode}>
+        <S.PlayerBtnShuffleSvg alt="shuffle" $isShuffle={isShuffle}>
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
         </S.PlayerBtnShuffleSvg>
       </S.PlayerBtnShuffle>

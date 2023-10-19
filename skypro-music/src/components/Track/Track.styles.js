@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled, css, keyframes } from 'styled-components';
 
 export const PlaylistItem = styled.div`
   width: 100%;
@@ -62,6 +62,29 @@ export const TrackTitleSvg = styled.svg`
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+`;
+
+const bubbleOut = keyframes`  
+  0%,
+  to {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+`;
+
+const animationCode = css`
+  ${bubbleOut} 0.6s ease-in-out infinite both;
+`;
+
+export const TrackTitleSvgActive = styled.svg`
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  animation: ${(props) => (props.$isPlaying ? animationCode : 'none')};
 `;
 
 export const TrackTitleLink = styled.a`

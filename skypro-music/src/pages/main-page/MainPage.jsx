@@ -3,17 +3,15 @@ import { CenterBlock } from '../../components/CenterBlock/CenterBlock';
 import { MainNav } from '../../components/MainNav/MainNav';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
 
-export function MainPage({ tracks, isLoading, setCurrentTrack, trackListError }) {
+export function MainPage({ isLoading, trackListError }) {
   return (
     <S.Main>
-      <MainNav setCurrentTrack={setCurrentTrack} />
+      <MainNav />
       <CenterBlock
         isLoading={isLoading}
-        tracks={tracks}
-        setCurrentTrack={setCurrentTrack}
         trackListError={trackListError}
       />
-      <Sidebar isLoading={isLoading} setCurrentTrack={setCurrentTrack} />
+      <Sidebar isLoading={isLoading} />
     </S.Main>
   );
 }

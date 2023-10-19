@@ -76,3 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Оценка по времени (Context)
 
 Заложено: 30 часов. Потрачено: 17 часов
+
+### Оценка по времени (Redux)
+
+Заложено: 30 часов. Потрачено: 36 часов

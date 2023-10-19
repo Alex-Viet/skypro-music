@@ -6,12 +6,11 @@ import { Favorites } from './pages/favorites/Favorites';
 import { MainPage } from './pages/main-page/MainPage';
 import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { useAuth } from './contexts/AuthContext';
 
-export function AppRoutes({ user,
-  tracks,
-  isLoading,
-  setCurrentTrack,
-  trackListError }) {
+export function AppRoutes({ isLoading, trackListError }) {
+  const { user } = useAuth();
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -22,12 +21,7 @@ export function AppRoutes({ user,
         path="/"
         element={(
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <MainPage
-              tracks={tracks}
-              isLoading={isLoading}
-              setCurrentTrack={setCurrentTrack}
-              trackListError={trackListError}
-            />
+            <MainPage isLoading={isLoading} trackListError={trackListError} />
           </ProtectedRoute>
         )}
       />

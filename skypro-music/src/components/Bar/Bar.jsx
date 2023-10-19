@@ -1,26 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
-import * as S from './Bar.styles';
+import { playTrack, stopTrack, playNextTrack } from '../../store/slices/playlistSlice';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
 import { VolumeBar } from './VolumeBar';
+import * as S from './Bar.styles';
 
-export const AudioPlayer = ({ currentTrack }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+export const AudioPlayer = () => {
   const [isLooping, setIsLooping] = useState(false);
 
+  const currentTrack = useSelector((state) => state.playlist.currentTrack);
+
   const audioRef = useRef(null);
+  const dispatch = useDispatch();
 
   // запуск/пауза
+  const isPlaying = useSelector((state) => state.playlist.isPlaying);
+
   const handleStart = () => {
     audioRef.current.play();
-    setIsPlaying(true);
+    dispatch(playTrack(true));
   };
 
   const handleStop = () => {
     audioRef.current.pause();
-    setIsPlaying(false);
+    dispatch(stopTrack(false));
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;
@@ -28,7 +34,10 @@ export const AudioPlayer = ({ currentTrack }) => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-      handleStart();
+
+      audioRef.current.onloadeddata = () => {
+        handleStart();
+      };
     }
   }, [currentTrack]);
 
@@ -51,18 +60,21 @@ export const AudioPlayer = ({ currentTrack }) => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.autoplay = true;
-      audioRef.current.addEventListener('timeupdate', () => {
+
+      const updateTime = () => {
         if (audioRef.current) {
           setCurrentTime(audioRef.current.currentTime);
         }
-        return () => {
-          audioRef.current.removeEventListener('timeupdate', () => {
-            setCurrentTime(audioRef.current.currentTime);
-          });
-        };
-      });
+      };
+
+      audioRef.current.addEventListener('timeupdate', updateTime);
+
+      return () => {
+        audioRef.current.removeEventListener('timeupdate', updateTime);
+      };
     }
-  }, []);
+    return null;
+  }, [currentTrack]);
 
   const handleProgressBarChange = (event) => {
     const newTime = parseFloat(event.target.value);
@@ -70,6 +82,14 @@ export const AudioPlayer = ({ currentTrack }) => {
     if (audioRef.current) {
       audioRef.current.currentTime = newTime;
     }
+  };
+
+  // функция перемотки трека
+  const rewindTrack = (value) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
+    }
+    setCurrentTime(value);
   };
 
   // регулятор громкости
@@ -90,6 +110,7 @@ export const AudioPlayer = ({ currentTrack }) => {
         src={currentTrack && currentTrack.track_file}
         ref={audioRef}
         style={{ display: 'none' }}
+        onEnded={() => dispatch(playNextTrack())}
       >
         <track kind="captions" />
       </audio>
@@ -114,6 +135,8 @@ export const AudioPlayer = ({ currentTrack }) => {
             toggleLoop={toggleLoop}
             isLooping={isLooping}
             currentTrack={currentTrack}
+            currentTime={currentTime}
+            rewindTrack={rewindTrack}
           />
 
           <S.PlayerTrackPlay>
