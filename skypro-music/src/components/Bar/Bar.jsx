@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatSecondsToTime } from '../../utils/utils';
-import { playTrack, stopTrack, playNextTrack } from '../../store/slices/playlistSlice';
+import {
+  playTrack,
+  stopTrack,
+  playNextTrack,
+} from '../../store/slices/playlistSlice';
 import { PlayerControls } from './PlayerControls';
 import { ProgressBar } from './ProgressBar';
 import { TrackPlay } from './TrackPlay';
@@ -70,7 +74,9 @@ export const AudioPlayer = () => {
       audioRef.current.addEventListener('timeupdate', updateTime);
 
       return () => {
-        audioRef.current.removeEventListener('timeupdate', updateTime);
+        if (audioRef.current) {
+          audioRef.current.removeEventListener('timeupdate', updateTime);
+        }
       };
     }
     return null;

@@ -23,10 +23,8 @@ export function CenterBlock({ isLoading, trackListError }) {
           </S.Col04>
         </S.ContentTitle>
         <S.ContentPlaylist>
-          <Track
-            isLoading={isLoading}
-            trackListError={trackListError}
-          />
+          <Track isLoading={isLoading} trackListError={trackListError} />
+
         </S.ContentPlaylist>
       </S.CenterBlockContent>
     </S.MainCenterBlock>

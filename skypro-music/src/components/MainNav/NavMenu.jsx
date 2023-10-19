@@ -20,7 +20,7 @@ export function NavMenu() {
           <S.MenuLink to="/">Главное</S.MenuLink>
         </S.MenuItem>
         <S.MenuItem>
-          <S.MenuLink to="/favorites">Мой плейлист</S.MenuLink>
+          <S.MenuLink to="/favorites">Мои треки</S.MenuLink>
         </S.MenuItem>
         <S.MenuItem>
           {localStorage.getItem('user') ? (
