@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from './LoginAndRegister.styles';
-import { loginUser, getToken } from '../../api';
+import { loginUser, getToken } from '../../api/auth';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const Login = () => {
@@ -76,7 +76,7 @@ export const Login = () => {
         {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
           {!isLoginLoading && (
-          <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+            <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
           )}
           <Link to="/register">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>

@@ -28,14 +28,16 @@ export function AppRoutes({ isLoading, trackListError }) {
       >
         <Route
           index
-          element={(
-            <Playlist
-              isLoading={isLoading}
-              trackListError={trackListError}
-            />
-          )}
+          element={
+            <Playlist isLoading={isLoading} trackListError={trackListError} />
+          }
         />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route
+          path="/favorites"
+          element={
+            <Favorites isLoading={isLoading} trackListError={trackListError} />
+          }
+        />
         <Route path="/category/:id" element={<Category />} />
       </Route>
     </Routes>

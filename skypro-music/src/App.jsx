@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTracks } from './api';
+import { getTracks } from './api/tracks';
 import GlobalStyles from './App.styles';
 import { AppRoutes } from './Routes';
 import * as S from './pages/main-page/MainPage.styles';
@@ -45,10 +45,7 @@ export function App() {
       <AuthProvider>
         <S.Wrapper>
           <S.Container>
-            <AppRoutes
-              isLoading={isLoading}
-              trackListError={trackListError}
-            />
+            <AppRoutes isLoading={isLoading} trackListError={trackListError} />
 
             {currentTrack && (
               <S.Bar>

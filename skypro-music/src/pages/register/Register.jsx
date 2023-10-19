@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as S from '../login/LoginAndRegister.styles';
-import { getToken, registerUser } from '../../api';
+import { getToken, registerUser } from '../../api/auth';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function Register() {
