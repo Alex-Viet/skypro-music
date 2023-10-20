@@ -19,11 +19,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(getAuthFromLocalStorage());
   const navigate = useNavigate();
 
-  const login = (userData, token) => {
-    const newUser = { ...userData, token };
-
-    setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
     navigate('/', { replace: true });
   };
 

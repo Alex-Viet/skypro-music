@@ -1,15 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { setCurrentTrack } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
+import { useGetFavoriteTracksQuery } from '../../services/tracks';
 import * as S from './Track.styles';
 
 export function Track({ isLoading, trackListError }) {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
-  const tracks = useSelector((state) => state.playlist.tracks);
+  const { data } = useGetFavoriteTracksQuery();
+
+  let tracks;
   const isPlaying = useSelector((state) => state.playlist.isPlaying);
   const currentTrack = useSelector((state) => state.playlist.currentTrack);
+
+  if (pathname === '/favorites') {
+    tracks = data;
+  } else {
+    tracks = useSelector((state) => state.playlist.tracks);
+  }
 
   return (
     <S.PlaylistItem>
