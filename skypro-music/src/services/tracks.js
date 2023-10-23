@@ -7,8 +7,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.access;
 
-      console.debug('Использую токен из стора', { token });
-
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -18,20 +16,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   });
 
   const result = await baseQuery(args, api, extraOptions);
-  console.debug('Результат первого запроса', { result });
 
   if (result?.error?.status !== 401) {
     return result;
   }
 
   const forceLogout = () => {
-    console.debug('Принудительная авторизация!');
     api.dispatch(setAuth(null));
     window.location.navigate('/login');
   };
 
   const { auth } = api.getState();
-  console.debug('Данные пользователя в сторе', { auth });
   if (!auth.refresh) {
     return forceLogout();
   }
@@ -48,8 +43,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     extraOptions,
   );
 
-  console.debug('Результат запроса на обновление токена', { refreshResult });
-
   if (!refreshResult.data.access) {
     return forceLogout();
   }
@@ -61,8 +54,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (retryResult?.error?.status === 401) {
     return forceLogout();
   }
-
-  console.debug('Повторный запрос завершился успешно');
 
   return retryResult;
 };

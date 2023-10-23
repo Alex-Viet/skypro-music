@@ -6,11 +6,11 @@ import { Skeleton } from '../Skeleton/Skeleton';
 import { useGetFavoriteTracksQuery } from '../../services/tracks';
 import * as S from './Track.styles';
 
-export function Track({ isLoading, trackListError }) {
+export function Track({ trackListError }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const { data } = useGetFavoriteTracksQuery();
+  const { data = [], isLoading } = useGetFavoriteTracksQuery();
 
   let tracks;
   const isPlaying = useSelector((state) => state.playlist.isPlaying);

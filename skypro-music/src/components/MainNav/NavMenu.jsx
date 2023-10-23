@@ -4,7 +4,7 @@ import { setCurrentTrack } from '../../store/slices/playlistSlice';
 import * as S from './MainNav.styles';
 
 export function NavMenu() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -22,7 +22,7 @@ export function NavMenu() {
           <S.MenuLink to="/favorites">Мои треки</S.MenuLink>
         </S.MenuItem>
         <S.MenuItem>
-          <S.MenuLink user={user} onClick={handleLogout}>
+          <S.MenuLink onClick={handleLogout}>
             Выйти
           </S.MenuLink>
         </S.MenuItem>

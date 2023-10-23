@@ -3,7 +3,7 @@ import { Filter } from '../Filter/Filter';
 import { Track } from '../Track/Track';
 import { PlaylistHeader } from './PlaylistHeader';
 
-export function Playlist({ isLoading, trackListError }) {
+export function Playlist({ trackListError }) {
   return (
     <>
       <Filter />
@@ -11,7 +11,7 @@ export function Playlist({ isLoading, trackListError }) {
       <S.PlaylistContent>
         <PlaylistHeader />
         <S.ContentPlaylist>
-          <Track isLoading={isLoading} trackListError={trackListError} />
+          <Track trackListError={trackListError} />
         </S.ContentPlaylist>
       </S.PlaylistContent>
     </>

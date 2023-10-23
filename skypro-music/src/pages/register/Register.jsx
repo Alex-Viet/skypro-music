@@ -47,9 +47,13 @@ export function Register() {
           login(loginData);
           dispatch(
             setAuth({
+              id: loginData.id,
+              email: loginData.email,
+              username: loginData.username,
               access: tokenData.access,
               refresh: tokenData.refresh,
-              user: JSON.parse(sessionStorage.getItem('user')),
+              first_name: loginData.first_name,
+              last_name: loginData.last_name,
             }),
           );
         });

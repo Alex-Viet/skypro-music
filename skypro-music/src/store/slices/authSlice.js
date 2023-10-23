@@ -6,7 +6,6 @@ function getAuthFromLocalStorage() {
   try {
     return JSON.parse(localStorage.getItem(AUTH_KEY));
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
@@ -14,6 +13,7 @@ function getAuthFromLocalStorage() {
 const initialState = {
   id: 0,
   email: '',
+  username: '',
   access: '',
   refresh: '',
   first_name: '',

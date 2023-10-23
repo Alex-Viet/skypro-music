@@ -7,16 +7,8 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-function getAuthFromLocalStorage() {
-  try {
-    return JSON.parse(localStorage.getItem('user'));
-  } catch (error) {
-    return null;
-  }
-}
-
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(getAuthFromLocalStorage());
+  const [user, setUser] = useState('');
   const navigate = useNavigate();
 
   const login = (userData) => {

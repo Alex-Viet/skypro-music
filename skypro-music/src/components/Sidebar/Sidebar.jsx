@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../contexts/AuthContext';
 import { PLAYLISTS } from '../../playlists';
 import { setCurrentTrack } from '../../store/slices/playlistSlice';
@@ -6,8 +6,10 @@ import { Categories } from '../Categories/Categories';
 import * as S from './Sidebar.styles';
 
 export function Sidebar({ isLoading }) {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const dispatch = useDispatch();
+
+  const username = useSelector((state) => state.auth.username);
 
   const handleLogout = () => {
     logout();
@@ -17,7 +19,7 @@ export function Sidebar({ isLoading }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>{user.username}</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{username}</S.SidebarPersonalName>
         <S.SidebarIcon onClick={handleLogout}>
           <S.SidebarLogoutSvg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
