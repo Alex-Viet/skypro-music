@@ -14,13 +14,16 @@ export function AuthProvider({ children }) {
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
-    navigate('/', { replace: true });
+    navigate('/');
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
     localStorage.clear();
-    navigate('/login', { replace: true });
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
+    });
+    navigate('/login');
   };
 
   const userContext = useMemo(

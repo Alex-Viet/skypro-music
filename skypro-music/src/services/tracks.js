@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setAuth } from '../store/slices/authSlice';
 
+const TRACKS_TAG = { type: 'Tracks', id: 'LIST' };
+
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: 'https://skypro-music-api.skyeng.tech',
@@ -62,15 +64,37 @@ export const tracksApi = createApi({
   reducerPath: 'tracksApi',
   baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
-    getMainPlaylist: build.query({
-      query: () => '/catalog/track/all/',
-    }),
     getFavoriteTracks: build.query({
       query: () => ({
         url: '/catalog/track/favorite/all/',
       }),
+      providesTags: (result) => (result
+        ? [
+          ...result.map(({ id }) => ({ type: TRACKS_TAG.type, id })),
+          TRACKS_TAG,
+        ]
+        : [TRACKS_TAG]),
+    }),
+    addFavoriteTracks: build.mutation({
+      query: (id) => ({
+        url: `/catalog/track/${id}/favorite/`,
+        method: 'POST',
+      }),
+      invalidatesTags: [TRACKS_TAG],
+    }),
+    deleteFavoriteTracks: build.mutation({
+      query: (id) => ({
+        url: `/catalog/track/${id}/favorite/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [TRACKS_TAG],
     }),
   }),
 });
 
-export const { useGetMainPlaylistQuery, useGetFavoriteTracksQuery } = tracksApi;
+export const {
+  useGetMainPlaylistQuery,
+  useGetFavoriteTracksQuery,
+  useAddFavoriteTracksMutation,
+  useDeleteFavoriteTracksMutation,
+} = tracksApi;
