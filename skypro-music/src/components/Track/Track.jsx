@@ -15,7 +15,7 @@ export function Track({ trackListError }) {
   const { pathname } = useLocation();
 
   const token = useSelector((state) => state.auth.access);
-  const { data = [], isLoading } = useGetFavoriteTracksQuery(token);
+  const { data = [] } = useGetFavoriteTracksQuery(token);
   const [addFavoriteTrack] = useAddFavoriteTracksMutation();
   const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
   const favoriteTracks = data;
@@ -24,6 +24,7 @@ export function Track({ trackListError }) {
   let tracks;
   const isPlaying = useSelector((state) => state.playlist.isPlaying);
   const currentTrack = useSelector((state) => state.playlist.currentTrack);
+  const isLoading = useSelector((state) => state.playlist.isLoading);
 
   if (pathname === '/favorites') {
     tracks = favoriteTracks;
@@ -33,9 +34,9 @@ export function Track({ trackListError }) {
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
     if (favTrackId.includes(track.id)) {
-      await deleteFavoriteTrack(track.id).unwrap();
+      await deleteFavoriteTrack({ id: track.id, access: token }).unwrap();
     } else {
-      await addFavoriteTrack(track.id).unwrap();
+      await addFavoriteTrack({ id: track.id, access: token }).unwrap();
     }
   };
 
@@ -101,75 +102,85 @@ export function Track({ trackListError }) {
           </S.PlaylistTrackSkeleton>
         </>
       ) : trackListError === null ? (
-        tracks.map((track) => {
-          return (
-            <S.PlaylistTrack key={track.id}>
-              <S.TrackTitle>
-                <S.TrackTitleImage>
-                  {currentTrack?.id !== track.id ? (
-                    <S.TrackTitleSvg alt="music">
-                      <use
-                        xlinkHref={
-                          isLoading ? '' : 'img/icon/sprite.svg#icon-note'
-                        }
-                      />
-                    </S.TrackTitleSvg>
-                  ) : (
-                    <S.TrackTitleSvgActive alt="music" $isPlaying={isPlaying}>
-                      <use xlinkHref="img/icon/sprite.svg#icon-dot" />
-                    </S.TrackTitleSvgActive>
-                  )}
-                </S.TrackTitleImage>
+        tracks.length > 0 ? (
+          tracks.map((track) => {
+            return (
+              <S.PlaylistTrack key={track.id}>
+                <S.TrackTitle>
+                  <S.TrackTitleImage>
+                    {currentTrack?.id !== track.id ? (
+                      <S.TrackTitleSvg alt="music">
+                        <use
+                          xlinkHref={
+                            isLoading ? '' : 'img/icon/sprite.svg#icon-note'
+                          }
+                        />
+                      </S.TrackTitleSvg>
+                    ) : (
+                      <S.TrackTitleSvgActive alt="music" $isPlaying={isPlaying}>
+                        <use xlinkHref="img/icon/sprite.svg#icon-dot" />
+                      </S.TrackTitleSvgActive>
+                    )}
+                  </S.TrackTitleImage>
+                  <div>
+                    <S.TrackTitleLink
+                      onClick={() => dispatch(setCurrentTrack(track))}
+                    >
+                      {track.name}
+                      <S.TrackTitleSpan />
+                    </S.TrackTitleLink>
+                  </div>
+                </S.TrackTitle>
+                <S.TrackAuthor>
+                  <S.TrackAuthorLink href="!#">
+                    {track.author}
+                  </S.TrackAuthorLink>
+                </S.TrackAuthor>
+                <S.TrackAlbum>
+                  <S.TrackAlbumLink href="!#">{track.album}</S.TrackAlbumLink>
+                </S.TrackAlbum>
                 <div>
-                  <S.TrackTitleLink
-                    onClick={() => dispatch(setCurrentTrack(track))}
+                  <S.TrackLikeSvg
+                    alt="like"
+                    onClick={() => toggleAddDeleteFavoriteTracks(track)}
                   >
-                    {track.name}
-                    <S.TrackTitleSpan />
-                  </S.TrackTitleLink>
+                    <svg
+                      width="14"
+                      height="12"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="Vector 13">
+                        <path
+                          d="M8.36529 12.751C14.2458 9.25098 17.3111 3.96019 13.9565 1.51832C11.7563 -0.0832586 9.29718 1.19273 8.36529 2.00669H8.34378H8.34372H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34372H8.34378H8.36529Z"
+                          fill={
+                            favTrackId.includes(track.id)
+                              ? '#B672FF'
+                              : 'transparent'
+                          }
+                        />
+                        <path
+                          d="M8.34372 2.00669H8.36529C9.29718 1.19273 11.7563 -0.0832586 13.9565 1.51832C17.3111 3.96019 14.2458 9.25098 8.36529 12.751H8.34372M8.34378 2.00669H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34378"
+                          stroke={
+                            favTrackId.includes(track.id)
+                              ? '#B672FF'
+                              : 'transparent'
+                          }
+                        />
+                      </g>
+                    </svg>
+                  </S.TrackLikeSvg>
+                  <S.TrackTimeText>
+                    {formatSecondsToTime(track.duration_in_seconds)}
+                  </S.TrackTimeText>
                 </div>
-              </S.TrackTitle>
-              <S.TrackAuthor>
-                <S.TrackAuthorLink href="!#">{track.author}</S.TrackAuthorLink>
-              </S.TrackAuthor>
-              <S.TrackAlbum>
-                <S.TrackAlbumLink href="!#">{track.album}</S.TrackAlbumLink>
-              </S.TrackAlbum>
-              <div>
-                <S.TrackLikeSvg
-                  alt="like"
-                  onClick={() => toggleAddDeleteFavoriteTracks(track)}
-                >
-                  <svg
-                    width="14"
-                    height="12"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g id="Vector 13">
-                      <path
-                        d="M8.36529 12.751C14.2458 9.25098 17.3111 3.96019 13.9565 1.51832C11.7563 -0.0832586 9.29718 1.19273 8.36529 2.00669H8.34378H8.34372H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34372H8.34378H8.36529Z"
-                        fill={
-                          favTrackId.includes(track.id) ? '#B672FF' : 'transparent'
-                        }
-                      />
-                      <path
-                        d="M8.34372 2.00669H8.36529C9.29718 1.19273 11.7563 -0.0832586 13.9565 1.51832C17.3111 3.96019 14.2458 9.25098 8.36529 12.751H8.34372M8.34378 2.00669H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34378"
-                        stroke={
-                          favTrackId.includes(track.id) ? '#B672FF' : 'transparent'
-                        }
-                      />
-                    </g>
-                  </svg>
-                </S.TrackLikeSvg>
-                <S.TrackTimeText>
-                  {formatSecondsToTime(track.duration_in_seconds)}
-                </S.TrackTimeText>
-              </div>
-            </S.PlaylistTrack>
-          );
-        })
+              </S.PlaylistTrack>
+            );
+          })
+        ) : (
+          <h3>Список пуст</h3>
+        )
       ) : (
         <h3>
           Не удалось загрузить плейлист, попробуйте позже. Ошибка:

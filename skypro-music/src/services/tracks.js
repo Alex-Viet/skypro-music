@@ -65,8 +65,9 @@ export const tracksApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
     getFavoriteTracks: build.query({
-      query: () => ({
+      query: (access) => ({
         url: '/catalog/track/favorite/all/',
+        headers: { Authorization: `Bearer ${access}` },
       }),
       providesTags: (result) => (result
         ? [
@@ -76,16 +77,18 @@ export const tracksApi = createApi({
         : [TRACKS_TAG]),
     }),
     addFavoriteTracks: build.mutation({
-      query: (id) => ({
+      query: ({ id, access }) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: 'POST',
+        headers: { Authorization: `Bearer ${access}` },
       }),
       invalidatesTags: [TRACKS_TAG],
     }),
     deleteFavoriteTracks: build.mutation({
-      query: (id) => ({
+      query: ({ id, access }) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: 'DELETE',
+        headers: { Authorization: `Bearer ${access}` },
       }),
       invalidatesTags: [TRACKS_TAG],
     }),

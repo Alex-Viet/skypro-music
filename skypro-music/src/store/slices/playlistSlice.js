@@ -9,10 +9,12 @@ const playlistSlice = createSlice({
     isShuffleModeOn: false,
     shuffledTracks: [],
     activePlaylist: [],
+    isLoading: true,
   },
   reducers: {
     addTracks(state, action) {
       state.tracks = action.payload;
+      state.isLoading = false;
       state.activePlaylist = [...state.tracks];
     },
     setCurrentTrack(state, action) {
