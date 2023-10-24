@@ -57,6 +57,9 @@ const playlistSlice = createSlice({
       state.shuffledTracks = action.payload;
       state.activePlaylist = [...state.shuffledTracks];
     },
+    favoritePlaylist(state, action) {
+      state.activePlaylist = action.payload;
+    },
   },
 });
 
@@ -69,5 +72,6 @@ export const {
   playPrevTrack,
   toggleShuffleMode,
   shuffleTracks,
+  favoritePlaylist,
 } = playlistSlice.actions;
 export default playlistSlice.reducer;

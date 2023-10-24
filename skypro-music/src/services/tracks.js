@@ -25,7 +25,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   const forceLogout = () => {
     api.dispatch(setAuth(null));
-    window.location.navigate('/login');
+    window.location.assign('/login');
   };
 
   const { auth } = api.getState();

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setCurrentTrack } from '../../store/slices/playlistSlice';
+import { setCurrentTrack, favoritePlaylist } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import {
@@ -28,8 +28,10 @@ export function Track({ trackListError }) {
 
   if (pathname === '/favorites') {
     tracks = favoriteTracks;
+    dispatch(favoritePlaylist([...favoriteTracks]));
   } else {
     tracks = useSelector((state) => state.playlist.tracks);
+    dispatch(favoritePlaylist([...tracks]));
   }
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
