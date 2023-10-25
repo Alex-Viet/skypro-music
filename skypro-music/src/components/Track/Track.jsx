@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setCurrentTrack, favoritePlaylist } from '../../store/slices/playlistSlice';
+import { setCurrentTrack, setPlaylist } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
 import {
@@ -21,17 +21,14 @@ export function Track({ trackListError }) {
   const favoriteTracks = data;
   const favTrackId = favoriteTracks.map((el) => el.id);
 
-  let tracks;
+  let tracks = useSelector((state) => state.playlist.tracks);
   const isPlaying = useSelector((state) => state.playlist.isPlaying);
   const currentTrack = useSelector((state) => state.playlist.currentTrack);
   const isLoading = useSelector((state) => state.playlist.isLoading);
+  const pageName = pathname === '/' ? 'Main' : 'Favorites';
 
-  if (pathname === '/favorites') {
+  if (pageName === 'Favorites') {
     tracks = favoriteTracks;
-    dispatch(favoritePlaylist([...favoriteTracks]));
-  } else {
-    tracks = useSelector((state) => state.playlist.tracks);
-    dispatch(favoritePlaylist([...tracks]));
   }
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
@@ -39,6 +36,15 @@ export function Track({ trackListError }) {
       await deleteFavoriteTrack({ id: track.id, access: token }).unwrap();
     } else {
       await addFavoriteTrack({ id: track.id, access: token }).unwrap();
+    }
+  };
+
+  const handleSetCurrentTrack = (elem) => {
+    dispatch(setCurrentTrack(elem));
+    if (pageName === 'Favorites') {
+      dispatch(setPlaylist([...favoriteTracks]));
+    } else {
+      dispatch(setPlaylist([...tracks]));
     }
   };
 
@@ -126,7 +132,7 @@ export function Track({ trackListError }) {
                   </S.TrackTitleImage>
                   <div>
                     <S.TrackTitleLink
-                      onClick={() => dispatch(setCurrentTrack(track))}
+                      onClick={() => handleSetCurrentTrack(track)}
                     >
                       {track.name}
                       <S.TrackTitleSpan />

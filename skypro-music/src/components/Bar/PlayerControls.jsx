@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useGetFavoriteTracksQuery } from '../../services/tracks';
 import {
   playNextTrack,
   playPrevTrack,
@@ -18,6 +20,17 @@ export function PlayerControls({
   rewindTrack,
 }) {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  const token = useSelector((state) => state.auth.access);
+  let tracks = useSelector((state) => state.playlist.tracks);
+  const { data = [] } = useGetFavoriteTracksQuery(token);
+  const favoriteTracks = data;
+  const pageName = pathname === '/' ? 'Main' : 'Favorites';
+
+  if (pageName === 'Favorites') {
+    tracks = favoriteTracks;
+  }
 
   // Переключение трека на следующий и предыдущий
   const handleNextTrack = () => {
@@ -34,8 +47,6 @@ export function PlayerControls({
 
   // Перемешивание треков
   const isShuffle = useSelector((state) => state.playlist.isShuffleModeOn);
-  const tracks = useSelector((state) => state.playlist.tracks);
-
   const handleShuffleMode = () => {
     const newShuffleMode = !isShuffle;
     dispatch(toggleShuffleMode(newShuffleMode));
