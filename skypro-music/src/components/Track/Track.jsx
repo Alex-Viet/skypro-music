@@ -33,9 +33,17 @@ export function Track({ trackListError }) {
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
     if (favTrackId.includes(track.id)) {
-      await deleteFavoriteTrack({ id: track.id, access: token }).unwrap();
+      try {
+        await deleteFavoriteTrack({ id: track.id, access: token }).unwrap();
+      } catch (error) {
+        console.log(error.message);
+      }
     } else {
-      await addFavoriteTrack({ id: track.id, access: token }).unwrap();
+      try {
+        await addFavoriteTrack({ id: track.id, access: token }).unwrap();
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
