@@ -148,7 +148,7 @@ export const AudioPlayer = () => {
           <S.PlayerTrackPlay>
             <TrackPlay currentTrack={currentTrack} />
 
-            <S.TrackPlayLikeDis>
+            <S.TrackPlayLikeDis style={{ visibility: 'hidden' }}>
               <S.TrackPlayLike className="_btn-icon">
                 <S.TrackPlayLikeSvg alt="like">
                   <use xlinkHref="img/icon/sprite.svg#icon-like" />
