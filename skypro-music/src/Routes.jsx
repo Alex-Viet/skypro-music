@@ -6,11 +6,9 @@ import { Favorites } from './pages/favorites/Favorites';
 import { MainPage } from './pages/main-page/MainPage';
 import { NotFound } from './pages/not-found-404/NotFound';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
-import { useAuth } from './contexts/AuthContext';
+import { Playlist } from './components/Playlist/Playlist';
 
 export function AppRoutes({ isLoading, trackListError }) {
-  const { user } = useAuth();
-
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -20,29 +18,25 @@ export function AppRoutes({ isLoading, trackListError }) {
       <Route
         path="/"
         element={(
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <MainPage isLoading={isLoading} trackListError={trackListError} />
+          <ProtectedRoute isAllowed={Boolean(localStorage.getItem('user'))}>
+            <MainPage isLoading={isLoading} />
           </ProtectedRoute>
         )}
-      />
-
-      <Route
-        path="/favorites"
-        element={(
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <Favorites />
-          </ProtectedRoute>
-        )}
-      />
-
-      <Route
-        path="/category/:id"
-        element={(
-          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <Category />
-          </ProtectedRoute>
-        )}
-      />
+      >
+        <Route
+          index
+          element={
+            <Playlist trackListError={trackListError} />
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <Favorites trackListError={trackListError} />
+          }
+        />
+        <Route path="/category/:id" element={<Category />} />
+      </Route>
     </Routes>
   );
 }

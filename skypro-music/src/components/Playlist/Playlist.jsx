@@ -1,27 +1,19 @@
-import { PLAYLISTS } from '../../playlists';
-import { Skeleton } from '../Skeleton/Skeleton';
 import * as S from './Playlist.styles';
+import { Filter } from '../Filter/Filter';
+import { Track } from '../Track/Track';
+import { PlaylistHeader } from './PlaylistHeader';
 
-export function Playlist({ isLoading }) {
+export function Playlist({ trackListError }) {
   return (
-    <S.SidebarItem>
-      {PLAYLISTS.map((playlist) => {
-        if (isLoading) {
-          return (
-            <Skeleton
-              width="250px"
-              height="150px"
-              margin="0 0 30px 0"
-              key={playlist.id}
-            />
-          );
-        }
-        return (
-          <S.SidebarLink to={`/category/${playlist.id}`} key={playlist.id}>
-            <S.SidebarImage src={playlist.img} alt="day's playlist" />
-          </S.SidebarLink>
-        );
-      })}
-    </S.SidebarItem>
+    <>
+      <Filter />
+
+      <S.PlaylistContent>
+        <PlaylistHeader />
+        <S.ContentPlaylist>
+          <Track trackListError={trackListError} />
+        </S.ContentPlaylist>
+      </S.PlaylistContent>
+    </>
   );
 }

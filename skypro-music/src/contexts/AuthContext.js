@@ -7,30 +7,23 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-function getAuthFromLocalStorage() {
-  try {
-    return JSON.parse(localStorage.getItem('user'));
-  } catch (error) {
-    return null;
-  }
-}
-
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(getAuthFromLocalStorage());
+  const [user, setUser] = useState('');
   const navigate = useNavigate();
 
-  const login = (userData, token) => {
-    const newUser = { ...userData, token };
-
-    setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
-    navigate('/', { replace: true });
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+    navigate('/');
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
     localStorage.clear();
-    navigate('/login', { replace: true });
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
+    });
+    navigate('/login');
   };
 
   const userContext = useMemo(

@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
+import * as S from '../../components/Playlist/Playlist.styles';
+import { PlaylistHeader } from '../../components/Playlist/PlaylistHeader';
+import { Track } from '../../components/Track/Track';
 
-export function Favorites() {
+export const Favorites = ({ trackListError }) => {
   return (
-    <div>
-      <h1>Мой плейлист</h1>
-      <Link to="/">Назад</Link>
-    </div>
+    <S.PlaylistContent>
+      <PlaylistHeader />
+      <S.ContentPlaylist>
+        <Track trackListError={trackListError} />
+      </S.ContentPlaylist>
+    </S.PlaylistContent>
   );
-}
+};

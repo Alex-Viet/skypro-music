@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as S from '../login/LoginAndRegister.styles';
-import { getToken, registerUser } from '../../api';
+import { getToken, registerUser } from '../../api/auth';
 import { useAuth } from '../../contexts/AuthContext';
+import { setAuth } from '../../store/slices/authSlice';
 
 export function Register() {
   const [regError, setRegError] = useState(null);
@@ -12,6 +14,7 @@ export function Register() {
   const [isRegLoading, setIsRegLoading] = useState(false);
 
   const { login } = useAuth();
+  const dispatch = useDispatch();
 
   const handleRegister = async (evt) => {
     evt.preventDefault();
@@ -41,7 +44,18 @@ export function Register() {
 
       await registerUser({ email, password }).then((loginData) => {
         getToken({ email, password }).then((tokenData) => {
-          login(loginData, tokenData.access);
+          login(loginData);
+          dispatch(
+            setAuth({
+              id: loginData.id,
+              email: loginData.email,
+              username: loginData.username,
+              access: tokenData.access,
+              refresh: tokenData.refresh,
+              first_name: loginData.first_name,
+              last_name: loginData.last_name,
+            }),
+          );
         });
       });
     } catch (error) {

@@ -80,3 +80,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Оценка по времени (Redux)
 
 Заложено: 30 часов. Потрачено: 36 часов
+
+### Оценка по времени (RTK Query)
+
+Заложено: 30 часов. Потрачено: 35 часов
