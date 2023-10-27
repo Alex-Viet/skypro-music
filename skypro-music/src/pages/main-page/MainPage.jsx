@@ -12,6 +12,18 @@ export function MainPage({ isLoading }) {
     title = 'Мои треки';
   }
 
+  if (pathname === '/category/1') {
+    title = 'Классическая музыка';
+  }
+
+  if (pathname === '/category/2') {
+    title = 'Электронная музыка';
+  }
+
+  if (pathname === '/category/3') {
+    title = 'Рок музыка';
+  }
+
   return (
     <S.Main>
       <MainNav />

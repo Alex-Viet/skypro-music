@@ -22,7 +22,7 @@ export function Sidebar({ isLoading }) {
         <S.SidebarPersonalName>{username}</S.SidebarPersonalName>
         <S.SidebarIcon onClick={handleLogout}>
           <S.SidebarLogoutSvg alt="logout">
-            <use xlinkHref="img/icon/sprite.svg#logout" />
+            <use xlinkHref="/img/icon/sprite.svg#logout" />
           </S.SidebarLogoutSvg>
         </S.SidebarIcon>
       </S.SidebarPersonal>
