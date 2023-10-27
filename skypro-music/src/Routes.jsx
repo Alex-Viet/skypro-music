@@ -35,7 +35,7 @@ export function AppRoutes({ isLoading, trackListError }) {
             <Favorites trackListError={trackListError} />
           }
         />
-        <Route path="/category/:id" element={<Category />} />
+        <Route path="/category/:id" element={<Category />} trackListError={trackListError} />
       </Route>
     </Routes>
   );

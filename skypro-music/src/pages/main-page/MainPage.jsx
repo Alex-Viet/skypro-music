@@ -1,10 +1,14 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import * as S from './MainPage.styles';
 import { MainNav } from '../../components/MainNav/MainNav';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
 import { Search } from '../../components/Search/Search';
+import { useGetCategoryQuery } from '../../services/tracks';
 
 export function MainPage({ isLoading }) {
+  const params = useParams();
+  const { data } = useGetCategoryQuery({ id: params.id });
+  const name = data?.name || '';
   const { pathname } = useLocation();
   let title = 'Треки';
 
@@ -12,16 +16,8 @@ export function MainPage({ isLoading }) {
     title = 'Мои треки';
   }
 
-  if (pathname === '/category/1') {
-    title = 'Классическая музыка';
-  }
-
-  if (pathname === '/category/2') {
-    title = 'Электронная музыка';
-  }
-
-  if (pathname === '/category/3') {
-    title = 'Рок музыка';
+  if (pathname === `/category/${params.id}`) {
+    title = name;
   }
 
   return (

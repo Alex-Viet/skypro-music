@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { setCurrentTrack, setPlaylist } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
@@ -10,9 +10,10 @@ import {
 } from '../../services/tracks';
 import * as S from './Track.styles';
 
-export function Track({ trackListError }) {
+export function Track({ trackListError, categoryTracks }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const params = useParams();
 
   const token = useSelector((state) => state.auth.access);
   const { data = [] } = useGetFavoriteTracksQuery(token);
@@ -29,6 +30,11 @@ export function Track({ trackListError }) {
 
   if (pageName === 'Favorites') {
     tracks = favoriteTracks;
+  }
+
+  if (pathname === `/category/${params.id}`) {
+    tracks = categoryTracks;
+    console.log(tracks);
   }
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
@@ -51,6 +57,8 @@ export function Track({ trackListError }) {
     dispatch(setCurrentTrack(elem));
     if (pageName === 'Favorites') {
       dispatch(setPlaylist([...favoriteTracks]));
+    } else if ((pathname === `/category/${params.id}`)) {
+      dispatch(setPlaylist([...categoryTracks]));
     } else {
       dispatch(setPlaylist([...tracks]));
     }

@@ -75,6 +75,14 @@ export const tracksApi = createApi({
           TRACKS_TAG,
         ]
         : [TRACKS_TAG]),
+      transformResponse: (response) => {
+        const transformedResponse = response.map((item) => ({
+          ...item,
+          stared_user: [JSON.parse(localStorage.getItem('user'))],
+        }));
+
+        return transformedResponse;
+      },
     }),
     addFavoriteTracks: build.mutation({
       query: ({ id, access }) => ({
@@ -92,6 +100,17 @@ export const tracksApi = createApi({
       }),
       invalidatesTags: [TRACKS_TAG],
     }),
+    getCategory: build.query({
+      query: ({ id }) => ({
+        url: `/catalog/selection/${id}/`,
+      }),
+      providesTags: (result = []) => [
+        ...(Array.isArray(result)
+          ? result.map(({ id }) => ({ type: TRACKS_TAG.type, id }))
+          : []),
+        TRACKS_TAG,
+      ],
+    }),
   }),
 });
 
@@ -100,4 +119,5 @@ export const {
   useGetFavoriteTracksQuery,
   useAddFavoriteTracksMutation,
   useDeleteFavoriteTracksMutation,
+  useGetCategoryQuery,
 } = tracksApi;

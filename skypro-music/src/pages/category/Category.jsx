@@ -1,20 +1,20 @@
-import { Link, useParams } from 'react-router-dom';
-import { PLAYLISTS } from '../../playlists';
+import { useParams } from 'react-router-dom';
+import { useGetCategoryQuery } from '../../services/tracks';
+import * as S from '../../components/Playlist/Playlist.styles';
+import { PlaylistHeader } from '../../components/Playlist/PlaylistHeader';
+import { Track } from '../../components/Track/Track';
 
-export function Category() {
+export function Category({ trackListError }) {
   const params = useParams();
-  const playlistId = PLAYLISTS.find(
-    (playlist) => playlist.id === Number(params.id),
-  );
+  const { data } = useGetCategoryQuery({ id: params.id });
+  const categoryTracks = data?.items || [];
 
   return (
-    <div>
-      <h1>
-        Подборка
-        {' '}
-        {playlistId.id}
-      </h1>
-      <Link to="/">Назад</Link>
-    </div>
+    <S.PlaylistContent>
+      <PlaylistHeader />
+      <S.ContentPlaylist>
+        <Track trackListError={trackListError} categoryTracks={categoryTracks} />
+      </S.ContentPlaylist>
+    </S.PlaylistContent>
   );
 }
