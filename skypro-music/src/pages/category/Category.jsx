@@ -6,14 +6,18 @@ import { Track } from '../../components/Track/Track';
 
 export function Category({ trackListError }) {
   const params = useParams();
-  const { data } = useGetCategoryQuery({ id: params.id });
+  const { data, isLoading } = useGetCategoryQuery({ id: params.id });
   const categoryTracks = data?.items || [];
 
   return (
     <S.PlaylistContent>
       <PlaylistHeader />
       <S.ContentPlaylist>
-        <Track trackListError={trackListError} categoryTracks={categoryTracks} />
+        <Track
+          trackListError={trackListError}
+          tracks={categoryTracks}
+          isLoading={isLoading}
+        />
       </S.ContentPlaylist>
     </S.PlaylistContent>
   );

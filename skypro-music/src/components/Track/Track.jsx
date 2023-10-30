@@ -1,19 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import {
+  useAddFavoriteTracksMutation,
+  useDeleteFavoriteTracksMutation,
+  useGetFavoriteTracksQuery,
+} from '../../services/tracks';
 import { setCurrentTrack, setPlaylist } from '../../store/slices/playlistSlice';
 import { formatSecondsToTime } from '../../utils/utils';
 import { Skeleton } from '../Skeleton/Skeleton';
-import {
-  useGetFavoriteTracksQuery,
-  useAddFavoriteTracksMutation,
-  useDeleteFavoriteTracksMutation,
-} from '../../services/tracks';
 import * as S from './Track.styles';
 
-export function Track({ trackListError, categoryTracks }) {
+export function Track({ trackListError, tracks, isLoading }) {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const params = useParams();
+
+  const isPlaying = useSelector((state) => state.playlist.isPlaying);
+  const currentTrack = useSelector((state) => state.playlist.currentTrack);
+
+  const handleSetCurrentTrack = (elem) => {
+    dispatch(setCurrentTrack(elem));
+    dispatch(setPlaylist([...tracks]));
+  };
 
   const token = useSelector((state) => state.auth.access);
   const { data = [] } = useGetFavoriteTracksQuery(token);
@@ -21,21 +26,6 @@ export function Track({ trackListError, categoryTracks }) {
   const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
   const favoriteTracks = data;
   const favTrackId = favoriteTracks.map((el) => el.id);
-
-  let tracks = useSelector((state) => state.playlist.tracks);
-  const isPlaying = useSelector((state) => state.playlist.isPlaying);
-  const currentTrack = useSelector((state) => state.playlist.currentTrack);
-  const isLoading = useSelector((state) => state.playlist.isLoading);
-  const pageName = pathname === '/' ? 'Main' : 'Favorites';
-
-  if (pageName === 'Favorites') {
-    tracks = favoriteTracks;
-  }
-
-  if (pathname === `/category/${params.id}`) {
-    tracks = categoryTracks;
-    console.log(tracks);
-  }
 
   const toggleAddDeleteFavoriteTracks = async (track) => {
     if (favTrackId.includes(track.id)) {
@@ -50,17 +40,6 @@ export function Track({ trackListError, categoryTracks }) {
       } catch (error) {
         console.log(error.message);
       }
-    }
-  };
-
-  const handleSetCurrentTrack = (elem) => {
-    dispatch(setCurrentTrack(elem));
-    if (pageName === 'Favorites') {
-      dispatch(setPlaylist([...favoriteTracks]));
-    } else if ((pathname === `/category/${params.id}`)) {
-      dispatch(setPlaylist([...categoryTracks]));
-    } else {
-      dispatch(setPlaylist([...tracks]));
     }
   };
 

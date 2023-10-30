@@ -115,7 +115,6 @@ export const tracksApi = createApi({
 });
 
 export const {
-  useGetMainPlaylistQuery,
   useGetFavoriteTracksQuery,
   useAddFavoriteTracksMutation,
   useDeleteFavoriteTracksMutation,
