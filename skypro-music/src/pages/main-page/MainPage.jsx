@@ -1,15 +1,24 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import * as S from './MainPage.styles';
 import { MainNav } from '../../components/MainNav/MainNav';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
 import { Search } from '../../components/Search/Search';
+import { useGetCategoryQuery } from '../../services/tracks';
+import { Filter } from '../../components/Filter/Filter';
 
 export function MainPage({ isLoading }) {
+  const params = useParams();
+  const { data } = useGetCategoryQuery({ id: params.id });
+  const name = data?.name || '';
   const { pathname } = useLocation();
   let title = 'Треки';
 
   if (pathname === '/favorites') {
     title = 'Мои треки';
+  }
+
+  if (pathname === `/category/${params.id}`) {
+    title = name;
   }
 
   return (
@@ -18,6 +27,7 @@ export function MainPage({ isLoading }) {
       <S.MainPlaylist>
         <Search />
         <S.PlaylistTitle>{title}</S.PlaylistTitle>
+        {pathname === '/' && <Filter />}
         <Outlet />
       </S.MainPlaylist>
       <Sidebar isLoading={isLoading} />
