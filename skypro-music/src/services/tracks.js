@@ -8,6 +8,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     baseUrl: 'https://skypro-music-api.skyeng.tech',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.access;
+      // console.debug('Использую токен из стора', { token });
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -18,17 +19,20 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   });
 
   const result = await baseQuery(args, api, extraOptions);
+  // console.debug('Результат первого запроса', { result });
 
   if (result?.error?.status !== 401) {
     return result;
   }
 
   const forceLogout = () => {
+    // console.debug('Принудительная авторизация!');
     api.dispatch(setAuth(null));
-    window.location.replace('/login');
+    window.location.assign('/login');
   };
 
   const { auth } = api.getState();
+  // console.debug('Данные пользователя в сторе', { auth });
   if (!auth.refresh) {
     return forceLogout();
   }
@@ -45,7 +49,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     extraOptions,
   );
 
-  if (!refreshResult.data.access) {
+  console.debug('Результат запроса на обновление токена', { refreshResult });
+
+  if (refreshResult?.error?.data) {
+    // console.debug(refreshResult.error.data);
     return forceLogout();
   }
 
@@ -56,6 +63,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (retryResult?.error?.status === 401) {
     return forceLogout();
   }
+
+  console.debug('Повторный запрос завершился успешно');
 
   return retryResult;
 };
@@ -104,12 +113,6 @@ export const tracksApi = createApi({
       query: ({ id }) => ({
         url: `/catalog/selection/${id}/`,
       }),
-      providesTags: (result = []) => [
-        ...(Array.isArray(result)
-          ? result.map(({ id }) => ({ type: TRACKS_TAG.type, id }))
-          : []),
-        TRACKS_TAG,
-      ],
     }),
   }),
 });

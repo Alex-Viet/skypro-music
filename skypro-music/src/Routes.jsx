@@ -23,19 +23,15 @@ export function AppRoutes({ isLoading, trackListError }) {
           </ProtectedRoute>
         )}
       >
-        <Route
-          index
-          element={
-            <Playlist trackListError={trackListError} />
-          }
-        />
+        <Route index element={<Playlist trackListError={trackListError} />} />
         <Route
           path="/favorites"
-          element={
-            <Favorites trackListError={trackListError} />
-          }
+          element={<Favorites trackListError={trackListError} />}
         />
-        <Route path="/category/:id" element={<Category />} trackListError={trackListError} />
+        <Route
+          path="/category/:id"
+          element={<Category trackListError={trackListError} />}
+        />
       </Route>
     </Routes>
   );
