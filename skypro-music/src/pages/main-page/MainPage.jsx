@@ -4,6 +4,7 @@ import { MainNav } from '../../components/MainNav/MainNav';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
 import { Search } from '../../components/Search/Search';
 import { useGetCategoryQuery } from '../../services/tracks';
+import { Filter } from '../../components/Filter/Filter';
 
 export function MainPage({ isLoading }) {
   const params = useParams();
@@ -26,6 +27,7 @@ export function MainPage({ isLoading }) {
       <S.MainPlaylist>
         <Search />
         <S.PlaylistTitle>{title}</S.PlaylistTitle>
+        {pathname === '/' && <Filter />}
         <Outlet />
       </S.MainPlaylist>
       <Sidebar isLoading={isLoading} />

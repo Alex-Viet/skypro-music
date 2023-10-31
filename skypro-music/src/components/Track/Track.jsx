@@ -115,13 +115,13 @@ export function Track({ trackListError, tracks, isLoading }) {
                       <S.TrackTitleSvg alt="music">
                         <use
                           xlinkHref={
-                            isLoading ? '' : 'img/icon/sprite.svg#icon-note'
+                            isLoading ? '' : '/img/icon/sprite.svg#icon-note'
                           }
                         />
                       </S.TrackTitleSvg>
                     ) : (
                       <S.TrackTitleSvgActive alt="music" $isPlaying={isPlaying}>
-                        <use xlinkHref="img/icon/sprite.svg#icon-dot" />
+                        <use xlinkHref="/img/icon/sprite.svg#icon-dot" />
                       </S.TrackTitleSvgActive>
                     )}
                   </S.TrackTitleImage>
